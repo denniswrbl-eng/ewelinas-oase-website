@@ -1,5 +1,5 @@
 # CLAUDE.md – Persistentes Gedächtnis für Dennis ("Big D")
-> Letzte Aktualisierung: 2026-04-10 (Abend)
+> Letzte Aktualisierung: 2026-04-10 (Nacht)
 
 ## Wer ist Dennis?
 - Solo-Gründer, aktuell krankgeschrieben (Krankengeld, mentale Belastung), reine Lernphase
@@ -132,8 +132,7 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 ## Bekannte Probleme / Offene Punkte
 1. **ewelinas-oase.de (ohne www) funktioniert nicht** – IONOS erlaubt keinen CNAME auf Root-Domain, Nameserver-Wechsel zu Cloudflare hat nicht geklappt
 2. **n8n läuft nur lokal** – Kontaktformular funktioniert nur wenn Dennis' PC an ist → Hetzner VPS nötig (aber erst kurz vor Gewerbeanmeldung, nicht jetzt)
-3. **Canonical-Tag falsch** – Zeigt auf ewelinas-oase.de (ohne www), muss auf www.ewelinas-oase.de zeigen
-4. **Airtable Base noch nicht angelegt** – Nur Docs, kein echtes Setup
+3. **Airtable Base noch nicht angelegt** – Nur Docs, kein echtes Setup
 5. **End-to-End Test steht aus** – Website → Formular → n8n → Airtable → Benachrichtigung
 6. **Regelbasierter Chatbot** – Alternative zum AI-Chatbot als günstigere Option noch nicht gebaut
 
@@ -142,6 +141,8 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 - ~~Formspree noch in Docs referenziert~~ → Docs aktualisiert
 - ~~WhatsApp-Flow fehlt~~ → v2 mit Prefill-Buttons live
 - ~~Multi-Tenant Chatbot~~ → Backend v2 mit CLIENTS-Objekt
+- ~~Canonical-Tag falsch~~ → Gefixt auf www.ewelinas-oase.de, deployed + gepusht
+- ~~Versehentlich erstelltes Cloudflare-Projekt "ewelinasoas"~~ → Kann gelöscht werden mit `npx wrangler pages project delete ewelinasoas`
 
 ## Langfrist-Vision
 - Mehrere Branchen-Templates (Fußpflege ✅, Friseur ✅, Handwerker ✅, Kosmetik, Gastro...)
