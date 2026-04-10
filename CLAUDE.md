@@ -1,5 +1,5 @@
 # CLAUDE.md – Persistentes Gedächtnis für Dennis ("Big D")
-> Letzte Aktualisierung: 2026-04-10 (Nacht)
+> Letzte Aktualisierung: 2026-04-10 (Nacht, Session 3)
 
 ## Wer ist Dennis?
 - Solo-Gründer, aktuell krankgeschrieben (Krankengeld, mentale Belastung), reine Lernphase
@@ -129,6 +129,34 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
   - Alles deployed und live
 - Git: Beide Repos committed + gepusht
 
+### Session 3 (10.04. Nacht)
+- **Chatbot v2 Backend fertig deployed:**
+  - Multi-Tenant `CLIENTS`-Objekt in chat.js (neuer Kunde = neues Objekt)
+  - System-Prompt komplett überarbeitet: Nagellack entfernt, klare Regeln (kein Erfinden, med. Fragen → Arzt)
+  - `clientId` im Request für Client-Routing
+  - Token-Limit: max 20 Nachrichten History + temperature 0.7
+  - CORS dynamisch pro Client (allowedOrigins im CLIENTS-Objekt)
+- **Chatbot v2 Widget fertig deployed:**
+  - `window.WRBL_CHAT_CONFIG` steuert alles (Farben, Texte, Quick Replies, API-URL, Client-ID)
+  - CSS-Prefix von "eo-" zu "wrbl-" geändert
+  - "Powered by WRBL Digital" Footer
+  - Mobile Fullscreen <480px
+  - `chatbot-widget-v2.js` in public/ + als Source
+  - `test-widget-v2.html` für lokales Testen
+- **generate.js: Chatbot v2 Integration**
+  - Rendert automatisch `window.WRBL_CHAT_CONFIG` Block aus config.json
+  - Farben werden aus `theme.colors` übernommen (terra → primary, brown → primaryHover)
+  - Font aus `theme.fonts.body`
+  - Backward-compatible: v1 Widgets funktionieren weiter (kein Config-Block wenn version != 2)
+- **config.json (demo-fusspflege) erweitert:**
+  - `integrations.chatbot` jetzt mit version:2, apiUrl, clientId, greeting, subtitle, quickReplies
+- **Git-Probleme gelöst:**
+  - GitHub Push Protection blockierte wegen `.claude/settings.local.json` (OAuth Token)
+  - Fix: `git reset --soft HEAD~2`, .claude/ in .gitignore, sauber neu committed
+  - `.wrangler/cache/` ebenfalls in .gitignore (Cloudflare-Credentials)
+- **Cloudflare-Projekt "ewelinasoas" gelöscht** (versehentlich erstelltes Duplikat)
+- Git: Beide Repos committed + gepusht (sauber, keine Secrets)
+
 ## Bekannte Probleme / Offene Punkte
 1. **ewelinas-oase.de (ohne www) funktioniert nicht** – IONOS erlaubt keinen CNAME auf Root-Domain, Nameserver-Wechsel zu Cloudflare hat nicht geklappt
 2. **n8n läuft nur lokal** – Kontaktformular funktioniert nur wenn Dennis' PC an ist → Hetzner VPS nötig (aber erst kurz vor Gewerbeanmeldung, nicht jetzt)
@@ -142,7 +170,7 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 - ~~WhatsApp-Flow fehlt~~ → v2 mit Prefill-Buttons live
 - ~~Multi-Tenant Chatbot~~ → Backend v2 mit CLIENTS-Objekt
 - ~~Canonical-Tag falsch~~ → Gefixt auf www.ewelinas-oase.de, deployed + gepusht
-- ~~Versehentlich erstelltes Cloudflare-Projekt "ewelinasoas"~~ → Kann gelöscht werden mit `npx wrangler pages project delete ewelinasoas`
+- ~~Versehentlich erstelltes Cloudflare-Projekt "ewelinasoas"~~ → Gelöscht in Session 3
 
 ## Langfrist-Vision
 - Mehrere Branchen-Templates (Fußpflege ✅, Friseur ✅, Handwerker ✅, Kosmetik, Gastro...)
@@ -150,6 +178,11 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 - Multi-Tenant Chatbot ✅ (1 Worker für alle Kunden)
 - Eventuell SaaS-Richtung
 - Agentur-Landingpage veröffentlichen (nach Gewerbeanmeldung)
+
+## Wichtige Pfade (Windows)
+- Website-Repo: `C:\Users\Home\Desktop\Ewelina Oase Final\`
+- Chatbot-Repo: `C:\Users\Home\Desktop\AI-Chatbot\` (NICHT `C:\Users\Home\AI-Chatbot`)
+- `.gitignore` in beiden Repos enthält: `.claude/`, `.wrangler/`
 
 ## Regeln für Claude
 - Deutsch sprechen, direkt und ehrlich sein
@@ -159,4 +192,5 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 - Bei PowerShell-Befehlen: einzeln, nicht als Block
 - Dennis tippt oft mit Tippfehlern – das ist normal, einfach verstehen
 - Nicht zu viel auf einmal – ein Schritt nach dem anderen
-- AI-Chatbot Repo liegt unter `C:\Users\Home\Desktop\AI-Chatbot` (NICHT `C:\Users\Home\AI-Chatbot`)
+- Bei Git: Aufpassen dass keine Secrets (.claude/, .wrangler/) committed werden
+- GitHub hat Push Protection aktiv – Tokens/Secrets werden automatisch blockiert
