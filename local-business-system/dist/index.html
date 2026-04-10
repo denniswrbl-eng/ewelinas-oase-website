@@ -705,8 +705,20 @@
   try { if (localStorage.getItem('cookies')) document.getElementById('cookie-bar').classList.add('hidden'); } catch(e) {}
 </script>
 
-<!-- Chatbot -->
-<script src="https://ewelinas-oase-chatbot.pages.dev/chatbot-widget.js"></script>
+<!-- Chatbot Widget v2 -->
+<script>
+  window.WRBL_CHAT_CONFIG = {
+    apiUrl: "https://ewelinas-oase-chatbot.pages.dev/api/chat",
+    clientId: "ewelinas-oase",
+    business: { name: "Ewelinas Oase", short: "E" },
+    theme: { primary: "#d4607a", primaryHover: "#6b3a4a" },
+    greeting: "Hallo! Schön, dass du vorbeischaust. Wie kann ich dir helfen? 😊",
+    subtitle: "Meistens antworte ich sofort",
+    quickReplies: [{"label":"Preise","msg":"Was kostet eine Fußpflege?"},{"label":"Öffnungszeiten","msg":"Wann habt ihr geöffnet?"},{"label":"Termin buchen","msg":"Ich möchte einen Termin buchen"},{"label":"Adresse","msg":"Wo ist der Salon?"}],
+    font: "Jost"
+  };
+</script>
+<script src="https://ewelinas-oase-chatbot.pages.dev/chatbot-widget-v2.js"></script>
 
 </body>
 </html>

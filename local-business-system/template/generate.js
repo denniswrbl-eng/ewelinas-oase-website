@@ -718,7 +718,19 @@ function generateHTML() {
   try { if (localStorage.getItem('cookies')) document.getElementById('cookie-bar').classList.add('hidden'); } catch(e) {}
 </script>
 
-${c.integrations.chatbot.enabled ? `<!-- Chatbot -->
+${c.integrations.chatbot.enabled ? `<!-- Chatbot Widget v2 -->
+${c.integrations.chatbot.version === 2 ? `<script>
+  window.WRBL_CHAT_CONFIG = {
+    apiUrl: "${esc(c.integrations.chatbot.apiUrl)}",
+    clientId: "${esc(c.integrations.chatbot.clientId)}",
+    business: { name: "${esc(c.business.name)}", short: "${esc(c.business.name[0])}" },
+    theme: { primary: "${esc(c.theme.colors.terra)}", primaryHover: "${esc(c.theme.colors.brown || c.theme.colors.terra)}" },
+    greeting: "${esc(c.integrations.chatbot.greeting || 'Hallo! Wie kann ich dir helfen?')}",
+    subtitle: "${esc(c.integrations.chatbot.subtitle || 'Meistens antworte ich sofort')}",
+    quickReplies: ${JSON.stringify(c.integrations.chatbot.quickReplies || [])},
+    font: "${esc(c.theme.fonts?.body || 'Jost')}"
+  };
+</script>` : ''}
 <script src="${esc(c.integrations.chatbot.scriptUrl)}"></script>` : ''}
 
 </body>

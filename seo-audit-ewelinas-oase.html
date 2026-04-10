@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO-Audit – Ewelinas Oase</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+  h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #0f172a; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #3b82f6; color: #1e40af; }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: #334155; }
+  .subtitle { color: #64748b; margin-bottom: 2rem; }
+  .score-bar { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
+  .score-card { flex: 1; min-width: 140px; background: #fff; border-radius: 12px; padding: 1.2rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .score-card .value { font-size: 2rem; font-weight: 700; }
+  .score-card .label { font-size: 0.8rem; color: #64748b; margin-top: 0.3rem; }
+  .green { color: #16a34a; }
+  .yellow { color: #d97706; }
+  .red { color: #dc2626; }
+  .blue { color: #2563eb; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  th { background: #1e40af; color: #fff; padding: 0.7rem 1rem; text-align: left; font-size: 0.85rem; }
+  td { padding: 0.6rem 1rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: #f8fafc; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+  .badge-pass { background: #dcfce7; color: #166534; }
+  .badge-warn { background: #fef3c7; color: #92400e; }
+  .badge-fail { background: #fce4ec; color: #b71c1c; }
+  .badge-high { background: #dbeafe; color: #1e40af; }
+  .badge-med { background: #e0e7ff; color: #3730a3; }
+  .badge-low { background: #f1f5f9; color: #475569; }
+  .summary-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 1.2rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+  .action-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 1.2rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+  .warn-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1.2rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+  .critical-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 1.2rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+  ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+  li { margin-bottom: 0.3rem; }
+  .footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; color: #94a3b8; font-size: 0.8rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>SEO-Audit: Ewelinas Oase</h1>
+<p class="subtitle">www.ewelinas-oase.de · Fußpflege in Hamm · Erstellt am 10. April 2026</p>
+
+<!-- SCORE OVERVIEW -->
+<div class="score-bar">
+  <div class="score-card"><div class="value green">A</div><div class="label">On-Page SEO</div></div>
+  <div class="score-card"><div class="value green">A</div><div class="label">Technisch</div></div>
+  <div class="score-card"><div class="value red">F</div><div class="label">Indexierung</div></div>
+  <div class="score-card"><div class="value yellow">C</div><div class="label">Content</div></div>
+  <div class="score-card"><div class="value yellow">D</div><div class="label">Backlinks</div></div>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<h2>Executive Summary</h2>
+<div class="summary-box">
+  <p><strong>Die gute Nachricht:</strong> Ewelinas Oase hat eine technisch saubere Website mit korrektem Schema.org Markup, DSGVO-konformer Datenschutzerklärung, guter Mobile-Optimierung und allen wichtigen On-Page SEO Elementen (Title, Meta Description, Alt-Texte, Open Graph).</p>
+  <br>
+  <p><strong>Das kritische Problem:</strong> Die Seite ist <strong>NICHT bei Google indexiert</strong>. Eine "site:ewelinas-oase.de" Suche liefert null Ergebnisse. Das bedeutet: Egal wie gut die Seite ist, sie wird aktuell von niemandem über Google gefunden. Das ist das #1 Problem.</p>
+  <br>
+  <p><strong>Top 3 Prioritäten:</strong></p>
+  <ol>
+    <li>Google Search Console einrichten + Indexierung beantragen</li>
+    <li>Google Business Profil erstellen (lokales SEO)</li>
+    <li>Branchenverzeichnis-Einträge für Backlinks</li>
+  </ol>
+</div>
+
+<!-- CRITICAL ISSUE -->
+<h2>Kritisches Problem: Keine Indexierung</h2>
+<div class="critical-box">
+  <p><strong>Die Seite taucht bei Google nicht auf.</strong> Eine Suche nach "site:ewelinas-oase.de" zeigt 0 Ergebnisse. Auch eine Suche nach "Ewelinas Oase Hamm" findet die Website nicht.</p>
+  <br>
+  <p><strong>Mögliche Ursachen:</strong></p>
+  <ul>
+    <li>Die Seite ist erst seit dem 10. April 2026 live – Google braucht typischerweise Tage bis Wochen zum Crawlen</li>
+    <li>Kein Google Search Console Konto eingerichtet → Google weiß nicht, dass die Seite existiert</li>
+    <li>Keine Backlinks von anderen Seiten → Google hat keinen Grund, die Seite zu finden</li>
+    <li>Root-Domain (ewelinas-oase.de ohne www) funktioniert nicht → potenzielle Crawl-Verwirrung</li>
+  </ul>
+  <br>
+  <p><strong>Sofort-Lösung:</strong> Google Search Console einrichten und URL manuell zur Indexierung einreichen. Das beschleunigt den Prozess auf 1-3 Tage statt Wochen.</p>
+</div>
+
+<!-- TECHNICAL SEO -->
+<h2>Technischer SEO-Check</h2>
+<table>
+  <tr><th>Check</th><th>Status</th><th>Details</th></tr>
+  <tr><td>HTTPS / SSL</td><td><span class="badge badge-pass">Pass</span></td><td>SSL aktiv via Cloudflare</td></tr>
+  <tr><td>Mobile-Friendly</td><td><span class="badge badge-pass">Pass</span></td><td>Viewport Meta Tag gesetzt, responsive CSS</td></tr>
+  <tr><td>robots.txt</td><td><span class="badge badge-pass">Pass</span></td><td>Vorhanden, Allow: /, Sitemap verlinkt</td></tr>
+  <tr><td>sitemap.xml</td><td><span class="badge badge-pass">Pass</span></td><td>Vorhanden, 1 URL gelistet</td></tr>
+  <tr><td>Canonical Tag</td><td><span class="badge badge-warn">Warnung</span></td><td>Canonical zeigt auf ewelinas-oase.de (ohne www) – aber nur www funktioniert</td></tr>
+  <tr><td>Schema.org</td><td><span class="badge badge-pass">Pass</span></td><td>HealthAndBeautyBusiness mit Adresse, Öffnungszeiten, Kontakt</td></tr>
+  <tr><td>Open Graph</td><td><span class="badge badge-pass">Pass</span></td><td>og:title, og:description, og:image, og:locale vorhanden</td></tr>
+  <tr><td>Geo-Tags</td><td><span class="badge badge-pass">Pass</span></td><td>geo.region=DE-NW, geo.placename=Hamm</td></tr>
+  <tr><td>Lazy Loading</td><td><span class="badge badge-pass">Pass</span></td><td>Service-Bilder haben loading="lazy"</td></tr>
+  <tr><td>Root Domain</td><td><span class="badge badge-fail">Fail</span></td><td>ewelinas-oase.de (ohne www) nicht erreichbar – IONOS erlaubt keinen CNAME auf @</td></tr>
+  <tr><td>Google Search Console</td><td><span class="badge badge-fail">Fail</span></td><td>Nicht eingerichtet</td></tr>
+  <tr><td>Google Business Profil</td><td><span class="badge badge-fail">Fail</span></td><td>Nicht vorhanden – essenziell für lokales SEO</td></tr>
+  <tr><td>Page Speed</td><td><span class="badge badge-pass">Pass</span></td><td>Single HTML file, inline CSS, Cloudflare CDN – sehr schnell</td></tr>
+  <tr><td>Font Loading</td><td><span class="badge badge-warn">Warnung</span></td><td>2 Google Fonts extern geladen – minimaler Render-Block</td></tr>
+</table>
+
+<!-- ON-PAGE SEO -->
+<h2>On-Page SEO Analyse</h2>
+<table>
+  <tr><th>Element</th><th>Status</th><th>Aktuell</th><th>Empfehlung</th></tr>
+  <tr>
+    <td>Title Tag</td>
+    <td><span class="badge badge-pass">Pass</span></td>
+    <td>"Ewelinas Oase – Fußpflege & Wellness in Hamm" (48 Zeichen)</td>
+    <td>Gut! Keyword + Ort im Title.</td>
+  </tr>
+  <tr>
+    <td>Meta Description</td>
+    <td><span class="badge badge-pass">Pass</span></td>
+    <td>"Ewelinas Oase in Hamm – professionelle Fußpflege..." (156 Zeichen)</td>
+    <td>Gut! Enthält Call-to-Action "Jetzt per WhatsApp buchen!"</td>
+  </tr>
+  <tr>
+    <td>H1 Tag</td>
+    <td><span class="badge badge-warn">Warnung</span></td>
+    <td>"Deine Füße verdienen das Beste"</td>
+    <td>Kreativ, aber kein Keyword. Besser: "Professionelle Fußpflege in Hamm"</td>
+  </tr>
+  <tr>
+    <td>H2 Tags</td>
+    <td><span class="badge badge-pass">Pass</span></td>
+    <td>4 H2s: Fußpflege, Ewelina, Kunden, Termin</td>
+    <td>Gute Struktur. Könnte "Fußpflege Hamm" in H2 einbauen.</td>
+  </tr>
+  <tr>
+    <td>Bild Alt-Texte</td>
+    <td><span class="badge badge-pass">Pass</span></td>
+    <td>Alle 5 Bilder haben beschreibende Alt-Texte mit "Hamm"</td>
+    <td>Sehr gut! Keyword "Fußpflege" + Ort in Alt-Texten.</td>
+  </tr>
+  <tr>
+    <td>URL-Struktur</td>
+    <td><span class="badge badge-pass">Pass</span></td>
+    <td>Saubere Root-URL, keine Parameter</td>
+    <td>Perfekt für OnePager.</td>
+  </tr>
+  <tr>
+    <td>Interne Links</td>
+    <td><span class="badge badge-warn">Warnung</span></td>
+    <td>Nur Navigation-Anker (gleiche Seite)</td>
+    <td>Kein Problem bei OnePager, aber Blog/Unterseiten würden helfen.</td>
+  </tr>
+  <tr>
+    <td>Externe Links</td>
+    <td><span class="badge badge-pass">Pass</span></td>
+    <td>rel="noopener noreferrer" auf WhatsApp/Google Links</td>
+    <td>Korrekt umgesetzt.</td>
+  </tr>
+</table>
+
+<!-- KEYWORD OPPORTUNITIES -->
+<h2>Keyword-Chancen</h2>
+<table>
+  <tr><th>Keyword</th><th>Schwierigkeit</th><th>Chance</th><th>Intent</th><th>Content-Typ</th></tr>
+  <tr><td><strong>Fußpflege Hamm</strong></td><td><span class="badge badge-med">Mittel</span></td><td><span class="badge badge-high">Hoch</span></td><td>Kommerziell</td><td>Homepage (already targeting)</td></tr>
+  <tr><td><strong>Fußpflege Hamm Preise</strong></td><td><span class="badge badge-low">Leicht</span></td><td><span class="badge badge-high">Hoch</span></td><td>Transaktional</td><td>Preisliste auf Homepage</td></tr>
+  <tr><td><strong>Fußpflege Hamm Termin</strong></td><td><span class="badge badge-low">Leicht</span></td><td><span class="badge badge-high">Hoch</span></td><td>Transaktional</td><td>Homepage / CTA</td></tr>
+  <tr><td><strong>Fußpflege in der Nähe</strong></td><td><span class="badge badge-med">Mittel</span></td><td><span class="badge badge-high">Hoch</span></td><td>Lokal</td><td>Google Business Profil</td></tr>
+  <tr><td><strong>Fußpflege Hamm Ostenallee</strong></td><td><span class="badge badge-low">Leicht</span></td><td><span class="badge badge-med">Mittel</span></td><td>Navigational</td><td>Homepage + GMB</td></tr>
+  <tr><td><strong>mobile Fußpflege Hamm</strong></td><td><span class="badge badge-low">Leicht</span></td><td><span class="badge badge-low">Niedrig</span></td><td>Kommerziell</td><td>Nur relevant falls angeboten</td></tr>
+  <tr><td><strong>Hornhaut entfernen Hamm</strong></td><td><span class="badge badge-low">Leicht</span></td><td><span class="badge badge-med">Mittel</span></td><td>Kommerziell</td><td>Service-Beschreibung</td></tr>
+  <tr><td><strong>Nagelpflege Hamm</strong></td><td><span class="badge badge-low">Leicht</span></td><td><span class="badge badge-med">Mittel</span></td><td>Kommerziell</td><td>Service-Beschreibung</td></tr>
+  <tr><td><strong>Fußpflege Bewertungen Hamm</strong></td><td><span class="badge badge-low">Leicht</span></td><td><span class="badge badge-med">Mittel</span></td><td>Informational</td><td>Google Business + Reviews</td></tr>
+  <tr><td><strong>Wellness Hamm</strong></td><td><span class="badge badge-med">Mittel</span></td><td><span class="badge badge-low">Niedrig</span></td><td>Informational</td><td>Zu breit, besser spezifisch</td></tr>
+</table>
+
+<!-- COMPETITOR COMPARISON -->
+<h2>Konkurrenz-Vergleich</h2>
+<table>
+  <tr><th>Dimension</th><th>Ewelinas Oase</th><th>Fußpflege Lorenz</th><th>Podologie Eickmann</th><th>Beautyservice Hamm</th></tr>
+  <tr><td>Website vorhanden</td><td class="green">Ja</td><td class="green">Ja</td><td class="green">Ja</td><td class="green">Ja</td></tr>
+  <tr><td>Google-indexiert</td><td class="red"><strong>Nein</strong></td><td class="green">Ja</td><td class="green">Ja</td><td class="green">Ja</td></tr>
+  <tr><td>Google Business</td><td class="red"><strong>Nein</strong></td><td class="green">Ja</td><td class="green">Ja</td><td class="green">Ja</td></tr>
+  <tr><td>Online-Buchung</td><td class="green">WhatsApp</td><td class="yellow">Telefon</td><td class="yellow">Telefon</td><td class="green">Ja</td></tr>
+  <tr><td>AI-Chatbot</td><td class="green"><strong>Ja</strong></td><td class="red">Nein</td><td class="red">Nein</td><td class="red">Nein</td></tr>
+  <tr><td>DSGVO-konform</td><td class="green">Ja</td><td class="yellow">Unklar</td><td class="yellow">Unklar</td><td class="yellow">Unklar</td></tr>
+  <tr><td>Modernes Design</td><td class="green"><strong>Ja</strong></td><td class="yellow">Veraltet</td><td class="yellow">OK</td><td class="yellow">OK</td></tr>
+  <tr><td>Brancheneinträge</td><td class="red"><strong>Keine</strong></td><td class="green">Mehrere</td><td class="green">Mehrere</td><td class="green">Mehrere</td></tr>
+  <tr><td>Schema.org</td><td class="green">Ja</td><td class="red">Nein</td><td class="yellow">Unklar</td><td class="red">Nein</td></tr>
+  <tr><td>Page Speed</td><td class="green"><strong>Sehr schnell</strong></td><td class="yellow">Mittel</td><td class="yellow">Mittel</td><td class="yellow">Mittel</td></tr>
+</table>
+
+<div class="summary-box">
+  <p><strong>Fazit:</strong> Die Website ist technisch <em>besser</em> als alle Konkurrenten (schneller, Schema.org, DSGVO, AI-Chatbot). Aber sie hat einen massiven Nachteil: <strong>Null Online-Sichtbarkeit</strong> wegen fehlender Indexierung und fehlendem Google Business Profil. Die Konkurrenz ist technisch schwächer, aber online sichtbar.</p>
+</div>
+
+<!-- CONTENT GAPS -->
+<h2>Content-Lücken</h2>
+<table>
+  <tr><th>Was fehlt</th><th>Warum wichtig</th><th>Priorität</th><th>Aufwand</th></tr>
+  <tr>
+    <td>Google Business Profil</td>
+    <td>#1 Ranking-Faktor für lokale Suchen. Erscheint im Maps Pack.</td>
+    <td><span class="badge badge-fail">Kritisch</span></td>
+    <td>30 Min</td>
+  </tr>
+  <tr>
+    <td>Detaillierte Preisliste</td>
+    <td>"Fußpflege Hamm Preise" ist ein häufiger Suchbegriff</td>
+    <td><span class="badge badge-high">Hoch</span></td>
+    <td>15 Min</td>
+  </tr>
+  <tr>
+    <td>Mehr Google-Bewertungen</td>
+    <td>4 Bewertungen ist wenig. Konkurrenz hat 20-60+.</td>
+    <td><span class="badge badge-high">Hoch</span></td>
+    <td>Laufend</td>
+  </tr>
+  <tr>
+    <td>FAQ-Bereich</td>
+    <td>"Was kostet Fußpflege?", "Wie oft?" → Featured Snippets</td>
+    <td><span class="badge badge-med">Mittel</span></td>
+    <td>1 Std</td>
+  </tr>
+  <tr>
+    <td>Branchenverzeichnisse</td>
+    <td>Backlinks + NAP-Konsistenz (Name, Adresse, Phone)</td>
+    <td><span class="badge badge-high">Hoch</span></td>
+    <td>2 Std</td>
+  </tr>
+  <tr>
+    <td>Vorher/Nachher Fotos</td>
+    <td>Erhöht Verweildauer, zeigt Qualität</td>
+    <td><span class="badge badge-low">Niedrig</span></td>
+    <td>30 Min</td>
+  </tr>
+</table>
+
+<!-- ACTION PLAN -->
+<h2>Aktionsplan</h2>
+
+<h3>Sofort machen (diese Woche)</h3>
+<div class="action-box">
+<ol>
+  <li><strong>Google Search Console einrichten</strong> (20 Min)
+    <br>→ search.google.com/search-console → Property hinzufügen → DNS-Verifizierung → Sitemap einreichen → URL zur Indexierung anmelden
+    <br>→ Impact: <span class="badge badge-fail">Kritisch</span> – ohne das wird die Seite NIE bei Google erscheinen</li>
+  <br>
+  <li><strong>Google Business Profil erstellen</strong> (30 Min)
+    <br>→ business.google.com → Neues Business erstellen → Kategorie "Fußpflege" → Adresse, Öffnungszeiten, Fotos, Website-URL eintragen
+    <br>→ Impact: <span class="badge badge-fail">Kritisch</span> – erscheint im Google Maps Pack bei "Fußpflege Hamm"</li>
+  <br>
+  <li><strong>Canonical Tag fixen</strong> (5 Min)
+    <br>→ In config.json die URL auf https://www.<strong>www.</strong>ewelinas-oase.de/ ändern (weil nur www funktioniert)
+    <br>→ Impact: <span class="badge badge-warn">Mittel</span> – verhindert Crawl-Verwirrung</li>
+  <br>
+  <li><strong>H1-Tag optimieren</strong> (5 Min)
+    <br>→ Von "Deine Füße verdienen das Beste" zu etwas mit Keyword, z.B. "Professionelle Fußpflege in Hamm – deine Füße verdienen das Beste"
+    <br>→ Impact: <span class="badge badge-high">Hoch</span></li>
+</ol>
+</div>
+
+<h3>Diese Woche / nächste Woche</h3>
+<div class="warn-box">
+<ol start="5">
+  <li><strong>Branchenverzeichnisse eintragen</strong> (2 Std)
+    <br>→ GelbeSeiten.de, GoLocal, 11880.com, werkenntdenbesten.de, Yelp, Branchenbuch Hamm
+    <br>→ Überall gleiche NAP-Daten: "Ewelinas Oase", Ostenallee 55, 59063 Hamm, 0176/31562454
+    <br>→ Impact: <span class="badge badge-high">Hoch</span> – Backlinks + lokale Signale für Google</li>
+  <br>
+  <li><strong>Kunden um Google-Bewertungen bitten</strong> (laufend)
+    <br>→ Die automatische Bewertungsanfrage per n8n (nach 7 Tagen) ist schon geplant
+    <br>→ Zwischenzeitlich: QR-Code im Salon aufhängen mit Link zur Google-Bewertung
+    <br>→ Impact: <span class="badge badge-high">Hoch</span> – mehr Bewertungen = besseres Ranking</li>
+  <br>
+  <li><strong>FAQ-Section auf der Website</strong> (1 Std)
+    <br>→ Fragen: "Was kostet eine Fußpflege?", "Wie lange dauert die Behandlung?", "Brauche ich einen Termin?", "Was ist bei der ersten Behandlung dabei?"
+    <br>→ Mit FAQ Schema Markup für Google Featured Snippets
+    <br>→ Impact: <span class="badge badge-med">Mittel</span></li>
+</ol>
+</div>
+
+<h3>Langfristig (dieses Quartal)</h3>
+<div class="summary-box">
+<ol start="8">
+  <li><strong>Root-Domain fixen</strong> – ewelinas-oase.de (ohne www) sollte auf www weiterleiten</li>
+  <li><strong>Blog/Content Marketing</strong> – z.B. "Fußpflege Tipps für den Sommer", "Wie oft zur Fußpflege?"</li>
+  <li><strong>Lokale Kooperationen</strong> – Links von anderen Hammer Businesses (Friseure, Kosmetik)</li>
+  <li><strong>Social Media Profile</strong> – Instagram & Facebook für lokale Reichweite</li>
+</ol>
+</div>
+
+<!-- OVERALL GRADE -->
+<h2>Gesamtbewertung</h2>
+<div class="score-bar">
+  <div class="score-card" style="flex: 2;"><div class="value yellow" style="font-size: 3rem;">C+</div><div class="label">SEO Gesamtnote</div></div>
+</div>
+<p style="text-align:center; color:#64748b; margin-top:0.5rem;">Technisch exzellent, aber ohne Google-Indexierung und Business-Profil aktuell unsichtbar.<br>
+Nach Umsetzung der Sofort-Maßnahmen: geschätztes Potenzial <strong style="color:#16a34a;">A-</strong></p>
+
+<div class="footer">
+  SEO-Audit erstellt von WRBL Digital · 10. April 2026 · Alle Angaben basieren auf öffentlich verfügbaren Daten
+</div>
+
+</div>
+</body>
+</html>

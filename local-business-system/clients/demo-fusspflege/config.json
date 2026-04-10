@@ -149,7 +149,18 @@
   "integrations": {
     "chatbot": {
       "enabled": true,
-      "scriptUrl": "https://ewelinas-oase-chatbot.pages.dev/chatbot-widget.js"
+      "version": 2,
+      "scriptUrl": "https://ewelinas-oase-chatbot.pages.dev/chatbot-widget-v2.js",
+      "apiUrl": "https://ewelinas-oase-chatbot.pages.dev/api/chat",
+      "clientId": "ewelinas-oase",
+      "greeting": "Hallo! Schön, dass du vorbeischaust. Wie kann ich dir helfen? 😊",
+      "subtitle": "Meistens antworte ich sofort",
+      "quickReplies": [
+        { "label": "Preise", "msg": "Was kostet eine Fußpflege?" },
+        { "label": "Öffnungszeiten", "msg": "Wann habt ihr geöffnet?" },
+        { "label": "Termin buchen", "msg": "Ich möchte einen Termin buchen" },
+        { "label": "Adresse", "msg": "Wo ist der Salon?" }
+      ]
     },
     "analytics": {
       "enabled": false,
