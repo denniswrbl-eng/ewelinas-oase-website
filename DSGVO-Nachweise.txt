@@ -1,0 +1,34 @@
+DSGVO-Nachweise – Ewelinas Oase
+================================
+Erstellt am: 09.04.2026
+
+1. AIRTABLE – Datenschutzrichtlinie / DPA
+   - Anbieter: Formagrid Inc. (Airtable)
+   - URL: https://www.airtable.com/company/privacy
+   - Stand: February 24, 2026
+   - Account: dennis.wrbl@gmail.com
+   - Nachweis: Privacy Policy eingesehen und akzeptiert am 09.04.2026
+   - EEA-Abschnitt: Sektion 10 "EEA, UK, Swiss-Specific Disclosures"
+
+2. GOOGLE (Gmail SMTP) – Auftragsverarbeitungsvertrag
+   - Anbieter: Google Ireland Ltd.
+   - URL: https://workspace.google.com/terms/dpa_terms.html
+   - Gilt automatisch fuer Gmail-Nutzer
+   - Account: dennis.wrbl@gmail.com
+   - Nachweis: DPA Terms eingesehen am 09.04.2026
+
+3. CLOUDFLARE (Hosting) – DPA
+   - Anbieter: Cloudflare, Inc.
+   - URL: https://www.cloudflare.com/de-de/cloudflare-customer-dpa/
+   - EU-US Data Privacy Framework zertifiziert
+   - Nachweis: DPA gilt automatisch fuer alle Cloudflare-Kunden
+
+4. GROQ (Chatbot KI) – Privacy Policy
+   - Anbieter: Groq Inc.
+   - URL: https://groq.com/privacy-policy/
+   - Genutzt fuer: KI-Chatbot auf der Website
+   - API ueber Cloudflare Pages Function
+   - Keine persistente Datenspeicherung der Chat-Nachrichten
+
+HINWEIS: Diese Datei dient als Dokumentation der DSGVO-Compliance.
+Bei Pruefung durch Aufsichtsbehoerde vorzeigen.

@@ -1,0 +1,71 @@
+{
+  "name": "02 - Neue Anfrage → Inhaber benachrichtigen",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "notify",
+        "options": {}
+      },
+      "id": "webhook-notify",
+      "name": "Webhook: Benachrichtigung triggern",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "notify"
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@deine-agentur.de",
+        "toEmail": "={{ $json.body.owner_email }}",
+        "subject": "Neue Anfrage von {{ $json.body.name }} ({{ $json.body.client }})",
+        "emailType": "html",
+        "html": "<h2>Neue Kundenanfrage!</h2>\n<table style='border-collapse:collapse; font-family:Arial;'>\n<tr><td style='padding:8px; font-weight:bold;'>Name:</td><td style='padding:8px;'>{{ $json.body.name }}</td></tr>\n<tr><td style='padding:8px; font-weight:bold;'>Telefon:</td><td style='padding:8px;'>{{ $json.body.phone }}</td></tr>\n<tr><td style='padding:8px; font-weight:bold;'>Email:</td><td style='padding:8px;'>{{ $json.body.email }}</td></tr>\n<tr><td style='padding:8px; font-weight:bold;'>Leistung:</td><td style='padding:8px;'>{{ $json.body.service }}</td></tr>\n<tr><td style='padding:8px; font-weight:bold;'>Wunschtermin:</td><td style='padding:8px;'>{{ $json.body.preferred_date }}</td></tr>\n<tr><td style='padding:8px; font-weight:bold;'>Nachricht:</td><td style='padding:8px;'>{{ $json.body.message }}</td></tr>\n</table>\n<p><a href='https://airtable.com'>→ In Airtable öffnen</a></p>"
+      },
+      "id": "email-senden",
+      "name": "Email: Inhaber benachrichtigen",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [480, 200],
+      "credentials": {
+        "smtp": {
+          "id": "DEINE_SMTP_CREDENTIAL_ID",
+          "name": "SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.callmebot.com/whatsapp.php",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "phone", "value": "={{ $json.body.owner_whatsapp }}" },
+            { "name": "text", "value": "🔔 Neue Anfrage!\n\nName: {{ $json.body.name }}\nLeistung: {{ $json.body.service }}\nTelefon: {{ $json.body.phone }}\n\n→ Check Airtable" },
+            { "name": "apikey", "value": "={{ $env.CALLMEBOT_API_KEY }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "whatsapp-notify",
+      "name": "WhatsApp: Inhaber benachrichtigen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [480, 420]
+    }
+  ],
+  "connections": {
+    "Webhook: Benachrichtigung triggern": {
+      "main": [
+        [
+          { "node": "Email: Inhaber benachrichtigen", "type": "main", "index": 0 },
+          { "node": "WhatsApp: Inhaber benachrichtigen", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [{ "name": "Benachrichtigung" }]
+}

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WRBL Digital – Websites & Automatisierung für lokale Dienstleister</title>
+<meta name="description" content="WRBL Digital baut moderne Websites, AI-Chatbots und Automatisierungen für lokale Dienstleister in Deutschland. Mehr Kunden, weniger Aufwand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafafa;--white:#ffffff;--dark:#0f172a;--text:#334155;--muted:#64748b;
+  --accent:#2563eb;--accent-light:#3b82f6;--accent-bg:rgba(37,99,235,.06);
+  --green:#10b981;--orange:#f59e0b;--border:#e2e8f0;--radius:12px;
+}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.9rem 0}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-weight:800;font-size:1.2rem;color:var(--dark);letter-spacing:-.02em}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.85rem;font-weight:500;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:.55rem 1.3rem;border-radius:8px;font-size:.82rem;font-weight:600;transition:background .2s}
+.nav-cta:hover{background:var(--accent-light)}
+
+/* ── HERO ── */
+.hero{padding:8rem 1.5rem 5rem;text-align:center;max-width:800px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--accent-bg);color:var(--accent);font-size:.78rem;font-weight:600;padding:.4rem 1rem;border-radius:99px;margin-bottom:1.5rem;letter-spacing:.02em}
+.hero-badge::before{content:"";width:6px;height:6px;background:var(--green);border-radius:50%}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;color:var(--dark);line-height:1.15;margin-bottom:1.2rem;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:580px;margin:0 auto 2rem;line-height:1.8}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;padding:.85rem 2rem;border-radius:10px;font-weight:600;font-size:.92rem;transition:all .2s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--accent-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,99,235,.25)}
+.btn-secondary{background:var(--white);color:var(--dark);padding:.85rem 2rem;border-radius:10px;font-weight:600;font-size:.92rem;border:1.5px solid var(--border);transition:all .2s;cursor:pointer}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── STATS BAR ── */
+.stats{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem 1.5rem}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
+.stat-num{font-size:1.8rem;font-weight:800;color:var(--dark)}
+.stat-num span{color:var(--accent)}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:.2rem;letter-spacing:.03em;text-transform:uppercase}
+
+/* ── SECTIONS ── */
+.section{padding:5rem 1.5rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--dark);margin-bottom:1rem;letter-spacing:-.02em}
+.section-desc{font-size:1rem;color:var(--muted);max-width:600px;line-height:1.8;margin-bottom:2.5rem}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.service-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .3s}
+.service-card:hover{border-color:var(--accent);box-shadow:0 8px 30px rgba(37,99,235,.08);transform:translateY(-2px)}
+.service-icon{width:48px;height:48px;background:var(--accent-bg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.2rem}
+.service-card h3{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.6rem}
+.service-card p{font-size:.88rem;color:var(--muted);line-height:1.7}
+.service-tag{display:inline-block;background:var(--accent-bg);color:var(--accent);font-size:.72rem;font-weight:600;padding:.25rem .7rem;border-radius:6px;margin-top:1rem}
+
+/* ── CASE STUDY ── */
+.case-study{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.case-header{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);padding:2.5rem 2.5rem 2rem;color:#fff}
+.case-header .section-label{color:var(--accent-light)}
+.case-header h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;color:#fff;margin-bottom:.5rem}
+.case-header p{color:rgba(255,255,255,.7);font-size:.92rem}
+.case-body{padding:2.5rem}
+.case-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-bottom:2rem}
+.case-result{text-align:center;padding:1.2rem;background:var(--accent-bg);border-radius:var(--radius)}
+.case-result-num{font-size:1.5rem;font-weight:800;color:var(--accent)}
+.case-result-label{font-size:.78rem;color:var(--muted);margin-top:.3rem}
+.case-features{display:flex;flex-wrap:wrap;gap:.6rem}
+.case-feature{background:var(--bg);border:1px solid var(--border);padding:.4rem .9rem;border-radius:8px;font-size:.78rem;color:var(--text);font-weight:500}
+.case-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);font-weight:600;font-size:.88rem;margin-top:1.5rem}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.price-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;position:relative;transition:all .3s}
+.price-card.featured{border-color:var(--accent);box-shadow:0 8px 30px rgba(37,99,235,.1)}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:.3rem 1rem;border-radius:99px;text-transform:uppercase;letter-spacing:.05em}
+.price-name{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:.3rem}
+.price-desc{font-size:.82rem;color:var(--muted);margin-bottom:1.2rem}
+.price-amount{font-size:2.4rem;font-weight:800;color:var(--dark)}
+.price-amount span{font-size:.9rem;font-weight:500;color:var(--muted)}
+.price-monthly{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem}
+.price-features{list-style:none;margin-bottom:1.5rem}
+.price-features li{font-size:.85rem;padding:.4rem 0;color:var(--text);display:flex;align-items:flex-start;gap:.5rem}
+.price-features li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0}
+.price-btn{display:block;text-align:center;padding:.75rem;border-radius:10px;font-weight:600;font-size:.88rem;transition:all .2s;cursor:pointer;border:none;width:100%}
+.price-btn-primary{background:var(--accent);color:#fff}
+.price-btn-primary:hover{background:var(--accent-light)}
+.price-btn-secondary{background:var(--bg);color:var(--dark);border:1.5px solid var(--border)}
+.price-btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── PROCESS ── */
+.process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;counter-reset:step}
+.process-step{position:relative;padding:1.5rem;counter-increment:step}
+.process-step::before{content:counter(step);font-size:2.5rem;font-weight:800;color:var(--accent-bg);position:absolute;top:.5rem;left:1.5rem;font-family:'Playfair Display',serif;z-index:0}
+.process-step h4{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.4rem;position:relative;z-index:1;padding-top:1rem}
+.process-step p{font-size:.82rem;color:var(--muted);line-height:1.7;position:relative;z-index:1}
+
+/* ── ABOUT ── */
+.about-content{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-text h3{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;color:var(--dark);margin-bottom:1rem}
+.about-text p{font-size:.92rem;color:var(--muted);line-height:1.8;margin-bottom:1rem}
+.about-values{display:flex;flex-direction:column;gap:.8rem}
+.about-value{display:flex;align-items:flex-start;gap:.8rem;padding:1rem;background:var(--white);border:1px solid var(--border);border-radius:var(--radius)}
+.about-value-icon{flex-shrink:0;width:36px;height:36px;background:var(--accent-bg);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.about-value h4{font-size:.88rem;font-weight:700;color:var(--dark);margin-bottom:.2rem}
+.about-value p{font-size:.78rem;color:var(--muted)}
+
+/* ── CTA ── */
+.cta-section{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);padding:4rem 1.5rem;text-align:center;border-radius:20px;max-width:1100px;margin:0 auto 4rem}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:#fff;margin-bottom:.8rem}
+.cta-section p{color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-section .btn-primary{background:#fff;color:var(--dark);padding:1rem 2.5rem}
+.cta-section .btn-primary:hover{background:var(--accent);color:#fff}
+
+/* ── FOOTER ── */
+.footer{padding:2rem 1.5rem;text-align:center;border-top:1px solid var(--border)}
+.footer p{font-size:.78rem;color:var(--muted)}
+
+/* ── DRAFT BANNER ── */
+.draft-banner{position:fixed;bottom:0;left:0;right:0;background:#fef3c7;border-top:2px solid var(--orange);padding:.6rem 1rem;text-align:center;z-index:200;font-size:.82rem;font-weight:600;color:#92400e}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .about-content{grid-template-columns:1fr}
+  .hero h1{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- DRAFT BANNER -->
+<div class="draft-banner">ENTWURF – Nicht veröffentlicht. Nur zur Vorschau.</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">WRBL <span>Digital</span></div>
+    <ul class="nav-links">
+      <li><a href="#services">Leistungen</a></li>
+      <li><a href="#casestudy">Referenz</a></li>
+      <li><a href="#pricing">Preise</a></li>
+      <li><a href="#process">Ablauf</a></li>
+      <li><a href="#cta" class="nav-cta">Kontakt</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Verfügbar für neue Projekte</div>
+  <h1>Moderne Websites & <em>Automatisierung</em> für lokale Dienstleister</h1>
+  <p>Du bist Friseur, Kosmetikerin, Handwerker oder Fußpflegerin? Ich baue dir eine professionelle Website mit integriertem Chatbot und automatisierter Kundengewinnung – alles aus einer Hand.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Kostenlos beraten lassen</button>
+    <button class="btn-secondary" onclick="document.getElementById('casestudy').scrollIntoView({behavior:'smooth'})">Referenzprojekt ansehen</button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div><div class="stat-num">&lt; <span>48h</span></div><div class="stat-label">Website fertig</div></div>
+    <div><div class="stat-num"><span>0 €</span></div><div class="stat-label">Hosting-Kosten</div></div>
+    <div><div class="stat-num"><span>100%</span></div><div class="stat-label">DSGVO-konform</div></div>
+    <div><div class="stat-num"><span>24/7</span></div><div class="stat-label">Chatbot aktiv</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-inner">
+    <div class="section-label">Leistungen</div>
+    <h2 class="section-title">Alles was dein Geschäft online braucht</h2>
+    <p class="section-desc">Kein Baukasten, kein Abo-Wahnsinn. Eine professionelle Lösung, die für dich arbeitet – nicht andersrum.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>Professionelle Website</h3>
+        <p>Schnell ladende, mobil-optimierte Website mit SEO, Google Maps Integration und elegantem Design. Individuell auf deine Branche zugeschnitten.</p>
+        <span class="service-tag">Ab 499 €</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>AI-Chatbot</h3>
+        <p>Intelligenter Chatbot der rund um die Uhr Kundenfragen beantwortet – zu deinen Leistungen, Preisen und Öffnungszeiten. Wie ein digitaler Mitarbeiter.</p>
+        <span class="service-tag">Inklusive</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Automatisierung</h3>
+        <p>Kontaktanfragen landen automatisch in deinem CRM. Du bekommst sofort eine E-Mail + WhatsApp-Benachrichtigung. Follow-Up nach 24h. Bewertungsanfrage nach 7 Tagen.</p>
+        <span class="service-tag">Kein manueller Aufwand</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="section" id="casestudy" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="section-label">Referenzprojekt</div>
+    <h2 class="section-title">Ewelinas Oase – Fußpflege in Hamm</h2>
+    <p class="section-desc">Komplett umgesetzt: Von der Idee zur fertigen Website mit Chatbot und Automatisierung – in unter 48 Stunden.</p>
+    <div class="case-study">
+      <div class="case-header">
+        <div class="section-label">Live Projekt</div>
+        <h3>www.ewelinas-oase.de</h3>
+        <p>Fußpflege & Wellness-Salon · Hamm, NRW</p>
+      </div>
+      <div class="case-body">
+        <div class="case-results">
+          <div class="case-result">
+            <div class="case-result-num">100</div>
+            <div class="case-result-label">PageSpeed Score</div>
+          </div>
+          <div class="case-result">
+            <div class="case-result-num">DSGVO ✓</div>
+            <div class="case-result-label">Rechtssicher</div>
+          </div>
+          <div class="case-result">
+            <div class="case-result-num">24/7</div>
+            <div class="case-result-label">Chatbot aktiv</div>
+          </div>
+          <div class="case-result">
+            <div class="case-result-num">0 €/Mo</div>
+            <div class="case-result-label">Hosting-Kosten</div>
+          </div>
+        </div>
+        <h4 style="font-size:.88rem;font-weight:700;color:var(--dark);margin-bottom:.8rem">Was umgesetzt wurde:</h4>
+        <div class="case-features">
+          <span class="case-feature">Responsive Design</span>
+          <span class="case-feature">AI-Chatbot (Groq)</span>
+          <span class="case-feature">Google Maps (DSGVO)</span>
+          <span class="case-feature">Kontaktformular → CRM</span>
+          <span class="case-feature">WhatsApp-Integration</span>
+          <span class="case-feature">SEO-Optimierung</span>
+          <span class="case-feature">Impressum & Datenschutz</span>
+          <span class="case-feature">Honeypot Spam-Schutz</span>
+          <span class="case-feature">Cookie-Banner</span>
+          <span class="case-feature">Schema.org Markup</span>
+        </div>
+        <a href="https://www.ewelinas-oase.de" target="_blank" rel="noopener" class="case-link">Live ansehen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <div class="section-inner">
+    <div class="section-label">So läuft's ab</div>
+    <h2 class="section-title">In 4 Schritten zu deiner Website</h2>
+    <p class="section-desc">Kein komplizierter Prozess. Du erzählst mir von deinem Geschäft – ich kümmere mich um den Rest.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>Erstgespräch</h4>
+        <p>Wir reden über dein Geschäft, deine Wünsche und was du online brauchst. Kostenlos, unverbindlich.</p>
+      </div>
+      <div class="process-step">
+        <h4>Design & Inhalte</h4>
+        <p>Ich erstelle deine Website mit deinen Texten, Bildern und Farben. Du bekommst eine Vorschau zum Prüfen.</p>
+      </div>
+      <div class="process-step">
+        <h4>Chatbot & Automatisierung</h4>
+        <p>Dein AI-Chatbot wird trainiert, Kontaktformular und CRM eingerichtet, alles getestet.</p>
+      </div>
+      <div class="process-step">
+        <h4>Go Live</h4>
+        <p>Website geht online, alles funktioniert. Du bekommst eine Einführung und ich bin für Support da.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="section-label">Preise</div>
+    <h2 class="section-title">Transparent und fair</h2>
+    <p class="section-desc">Keine versteckten Kosten. Du weißt vorher genau was du bekommst und was es kostet.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">OnePager</div>
+        <div class="price-desc">Perfekt für den Start – eine Seite, alles drauf.</div>
+        <div class="price-amount">499 € <span>einmalig</span></div>
+        <div class="price-monthly">+ 49 €/Monat für Hosting, Support & Updates</div>
+        <ul class="price-features">
+          <li>Professionelle OnePage-Website</li>
+          <li>Mobil-optimiert & SEO</li>
+          <li>Google Maps Integration</li>
+          <li>Kontaktformular</li>
+          <li>Impressum & Datenschutz (DSGVO)</li>
+          <li>WhatsApp-Button</li>
+        </ul>
+        <button class="price-btn price-btn-secondary">Anfragen</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Beliebteste Wahl</div>
+        <div class="price-name">Komplett-Paket</div>
+        <div class="price-desc">Website + Chatbot + Automatisierung – das volle Programm.</div>
+        <div class="price-amount">1.299 € <span>einmalig</span></div>
+        <div class="price-monthly">+ 79 €/Monat für Hosting, Chatbot, Support & Updates</div>
+        <ul class="price-features">
+          <li>Alles aus OnePager</li>
+          <li>AI-Chatbot (24/7 Kundenservice)</li>
+          <li>CRM-System (Airtable)</li>
+          <li>Automatische E-Mail-Benachrichtigung</li>
+          <li>WhatsApp-Benachrichtigung</li>
+          <li>Follow-Up Automatisierung</li>
+          <li>Google-Bewertung Anfrage (7 Tage)</li>
+        </ul>
+        <button class="price-btn price-btn-primary">Anfragen</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="about-content">
+      <div class="about-text">
+        <div class="section-label">Über mich</div>
+        <h3>Dennis Wrobel</h3>
+        <p>Ich helfe lokalen Dienstleistern in Deutschland dabei, online professionell aufzutreten und Kunden zu gewinnen – mit moderner Technik, aber ohne den typischen Agentur-Bullshit.</p>
+        <p>Keine Jahresverträge, keine überteuerten Pakete. Faire Preise, schnelle Umsetzung, direkter Kontakt.</p>
+      </div>
+      <div class="about-values">
+        <div class="about-value">
+          <div class="about-value-icon">⚡</div>
+          <div><h4>Schnell</h4><p>Deine Website steht in unter 48 Stunden – nicht in 6 Wochen.</p></div>
+        </div>
+        <div class="about-value">
+          <div class="about-value-icon">🔒</div>
+          <div><h4>DSGVO-sicher</h4><p>Impressum, Datenschutz, Cookie-Banner – alles korrekt von Anfang an.</p></div>
+        </div>
+        <div class="about-value">
+          <div class="about-value-icon">💬</div>
+          <div><h4>Direkt</h4><p>Ein Ansprechpartner, kurze Wege, kein Agentur-Overhead.</p></div>
+        </div>
+        <div class="about-value">
+          <div class="about-value-icon">🤖</div>
+          <div><h4>AI-powered</h4><p>Modernste Technologie für deinen Chatbot und Automatisierungen.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="cta">
+  <div class="cta-section">
+    <h2>Bereit für deine professionelle Website?</h2>
+    <p>Lass uns in einem kostenlosen Erstgespräch herausfinden, wie ich dir helfen kann.</p>
+    <a href="mailto:dennis.wrbl@gmail.com" class="btn-primary" style="display:inline-block;text-decoration:none">Jetzt Kontakt aufnehmen</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>&copy; 2026 WRBL Digital · Dennis Wrobel · Hamm, Deutschland</p>
+</footer>
+
+</body>
+</html>
