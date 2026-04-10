@@ -11,7 +11,8 @@
 | Cloudflare Pages | Hosting (unbegrenzt) | Kostenlos |
 | Airtable Free | CRM (bis 1.000 Records) | Kostenlos |
 | Docker + n8n (lokal) | Automationen | Kostenlos |
-| Formspree Free | Kontaktformulare (50/Mo) | Kostenlos |
+| Cloudflare Workers | Chatbot Backend | Kostenlos |
+| Groq API (LLaMA 3.3 70B) | LLM für Chatbot | Kostenlos |
 
 ## Mit Kunden – ca. 103€/Monat + Domains
 
@@ -36,6 +37,13 @@
 - Volle Kontrolle über Daten (DSGVO!)
 - Faire Preise falls doch Cloud (24€/Mo)
 - Zapier wäre 20-50€/Mo für gleiche Funktionalität
+
+## Warum Groq statt OpenAI für Chatbot?
+- Kostenlos (Rate-Limited, reicht für lokale Dienstleister)
+- Extrem schnelle Inferenz (LPU statt GPU)
+- LLaMA 3.3 70B = gute Qualität auf Deutsch
+- Kein API-Key-Kosten bis zu einem gewissen Traffic
+- OpenAI wäre 20-50€/Mo für gleichen Use Case
 
 ## Warum Airtable statt Google Sheets?
 - Echte Datenbank (Feldtypen, Validierung)

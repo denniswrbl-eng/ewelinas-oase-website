@@ -127,6 +127,21 @@ node template/generate.js clients/mein-kunde/config.json clients/mein-kunde/dist
 # Öffne clients/mein-kunde/dist/index.html im Browser
 ```
 
+## 5b. Deployment auf Cloudflare Pages
+
+```powershell
+# In den dist-Ordner wechseln
+cd clients/mein-kunde/dist
+
+# Auf Cloudflare Pages deployen (Projekt muss vorher existieren)
+npx wrangler pages deploy . --project-name=projektname
+
+# Beim ersten Mal: Cloudflare-Login im Browser bestätigen
+# Danach: Custom Domain in Cloudflare Dashboard → Pages → Custom Domains hinzufügen
+```
+
+**Wichtig:** Domain-DNS muss als CNAME auf `projektname.pages.dev` zeigen.
+
 ---
 
 ## 6. End-to-End Test
@@ -137,19 +152,17 @@ So testest du die komplette Kette:
 1. n8n Workflow `01-anfrage-speichern` aktivieren
 2. Webhook-URL kopieren (z.B. `http://localhost:5678/webhook/anfrage`)
 3. Im Terminal testen:
+
+**PowerShell (Windows):**
+```powershell
+Invoke-RestMethod -Uri "http://localhost:5678/webhook/anfrage" -Method POST -ContentType "application/json" -Body '{"name":"Test Person","email":"test@example.com","phone":"01761234567","message":"Das ist ein Testformular"}'
+```
+
+**Bash (Linux/Mac):**
 ```bash
 curl -X POST http://localhost:5678/webhook/anfrage \
   -H "Content-Type: application/json" \
-  -d '{
-    "name": "Test Person",
-    "email": "test@example.com",
-    "phone": "+491761234567",
-    "service": "Fußpflege Basis",
-    "preferred_date": "nächste Woche Dienstag",
-    "message": "Hallo, ich möchte einen Termin.",
-    "source": "Website-Formular",
-    "client": "Ewelinas Oase"
-  }'
+  -d '{"name":"Test Person","email":"test@example.com","phone":"01761234567","message":"Das ist ein Testformular"}'
 ```
 4. In Airtable prüfen → neuer Eintrag sollte da sein ✓
 
