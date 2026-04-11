@@ -6,19 +6,24 @@
   <title>Ewelinas Oase – Fußpflege &amp; Wellness in Hamm</title>
   <meta name="description" content="Ewelinas Oase in Hamm – professionelle Fußpflege &amp; Wellness-Behandlungen. Persönliche Betreuung, höchste Hygienestandards. Termine Mo–Fr nach Vereinbarung. Jetzt per WhatsApp buchen!">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ewelinas-oase.de/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant%20Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://www.ewelinas-oase.de/">
+  <!-- Fonts lokal geladen (DSGVO-konform, keine Datenübertragung an Google) -->
+  <style>
+    @font-face { font-family: 'Cormorant Garamond'; src: url('fonts/cormorant-garamond-300.ttf') format('truetype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Cormorant Garamond'; src: url('fonts/cormorant-garamond-300-italic.ttf') format('truetype'); font-weight: 300; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Jost'; src: url('fonts/jost-300.ttf') format('truetype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Jost'; src: url('fonts/jost-400.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Jost'; src: url('fonts/jost-500.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+  </style>
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Ewelinas Oase – Fußpflege &amp; Wellness in Hamm">
   <meta property="og:description" content="Professionelle Fußpflege in Hamm. Persönliche Betreuung, höchste Hygienestandards. Jetzt Termin buchen!">
-  <meta property="og:url" content="https://ewelinas-oase.de/">
+  <meta property="og:url" content="https://www.ewelinas-oase.de/">
   <meta property="og:locale" content="de_DE">
   <meta property="og:site_name" content="Ewelinas Oase">
-  <meta property="og:image" content="https://ewelinas-oase.de/images/hero.jpg">
+  <meta property="og:image" content="https://www.ewelinas-oase.de/images/hero.jpg">
   <meta name="geo.region" content="DE-NW">
   <meta name="geo.placename" content="Hamm">
 
@@ -29,7 +34,7 @@
   "@type": "HealthAndBeautyBusiness",
   "name": "Ewelinas Oase",
   "description": "Professionelle Fußpflege & Wellness-Behandlungen in Hamm",
-  "url": "https://ewelinas-oase.de/",
+  "url": "https://www.ewelinas-oase.de/",
   "telephone": "+4917631562454",
   "email": "info@ewelinas-oase.de",
   "address": {
@@ -56,7 +61,8 @@
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": "Saturday",
       "opens": "08:00",
-      "closes": "14:00"
+      "closes": "20:00",
+      "description": "Termine nach Vereinbarung"
     }
   ],
   "priceRange": "€"
@@ -353,7 +359,7 @@
   <div class="leis-main">
     <div class="leis-main-body">
       <p class="leis-intro">Deine Zeit, deine Auszeit. Kein Stress, kein Hetzen – nur du, deine Füße und eine ruhige Stunde, die du dir verdient hast.</p>
-      <p class="leis-text">Deine Füße werden in einem warmen, aromatischen Fußbad gebadet, sanft gepeelt und von Hornhaut befreit. Anschließend folgt eine wohltuende Massage – und auf Wunsch ein Nagellack in deiner Lieblingsfarbe.</p>
+      <p class="leis-text">Deine Füße werden in einem warmen, aromatischen Fußbad gebadet, sanft gepeelt und von Hornhaut befreit. Anschließend werden die Nägel sorgfältig gekürzt und gefeilt, bevor eine wohltuende Massage den Abschluss bildet.</p>
       <div class="leis-checks">
         <div class="leis-check"><span>✦</span> Fußbad, Peeling &amp; Hornhautentfernung inklusive</div>
         <div class="leis-check"><span>✦</span> Persönliche Betreuung – kein Fließbandbetrieb</div>
@@ -375,8 +381,8 @@
       <div class="leis-img-label">Massage</div>
     </div>
     <div class="leis-img-item">
-      <img alt="Nagellack auf Wunsch – Ewelinas Oase Hamm" src="images/service-2.jpg" loading="lazy">
-      <div class="leis-img-label">Nagellack auf Wunsch</div>
+      <img alt="Nagelpflege – Ewelinas Oase Hamm" src="images/service-2.jpg" loading="lazy">
+      <div class="leis-img-label">Nagelpflege</div>
     </div>
     <div class="leis-img-item">
       <img alt="Ergebnis – Ewelinas Oase Hamm" src="images/service-3.jpg" loading="lazy">
@@ -667,16 +673,17 @@
       client: 'Ewelinas Oase'
     };
 
-    fetch('http://localhost:5678/webhook/anfrage', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(function(r) {
-        if (r.ok) { ok.style.display = 'block'; form.reset(); btn.textContent = 'Gesendet ✓'; }
-        else { btn.textContent = 'Fehler – bitte per WhatsApp melden'; btn.disabled = false; }
-      })
-      .catch(function() { btn.textContent = 'Fehler – bitte per WhatsApp melden'; btn.disabled = false; });
+    // WhatsApp-Fallback: Formulardaten als WhatsApp-Nachricht öffnen
+    var waText = 'Hallo Ewelina,%0A%0A'
+      + 'ich möchte gerne einen Termin anfragen.%0A%0A'
+      + 'Name: ' + encodeURIComponent(data.name) + '%0A'
+      + 'Telefon: ' + encodeURIComponent(data.phone) + '%0A'
+      + 'Leistung: ' + encodeURIComponent(data.service) + '%0A'
+      + 'Wunschtermin: ' + encodeURIComponent(data.preferred_date) + '%0A';
+    window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
+    ok.style.display = 'block';
+    form.reset();
+    btn.textContent = 'Gesendet ✓';
   }
 
   // Modals
@@ -690,9 +697,25 @@
   try { if (localStorage.getItem('cookies')) document.getElementById('cookie-bar').classList.add('hidden'); } catch(e) {}
 </script>
 
-<!-- Chatbot -->
-<script src="https://ewelinas-oase-chatbot.pages.dev/chatbot-widget.js"></script>
-<script src="https://glowing-kataifi-ed4931.netlify.app/widget.js"></script>
+<!-- Chatbot v2 (config-basiert, multi-tenant) -->
+<script>
+  window.WRBL_CHAT_CONFIG = {
+    apiUrl: "https://ewelinas-oase-chatbot.pages.dev/api/chat",
+    clientId: "ewelinas-oase",
+    business: { name: "Ewelinas Oase", short: "E" },
+    theme: { primary: "#d4607a", primaryHover: "#6b3a4a" },
+    greeting: "Hallo! Schön, dass du vorbeischaust. Wie kann ich dir helfen? 😊",
+    subtitle: "Meistens antworte ich sofort",
+    quickReplies: [
+      { label: "Preise", msg: "Was kostet eine Fußpflege?" },
+      { label: "Öffnungszeiten", msg: "Wann habt ihr geöffnet?" },
+      { label: "Termin buchen", msg: "Ich möchte einen Termin buchen" },
+      { label: "Adresse", msg: "Wo ist der Salon?" }
+    ],
+    font: "Jost"
+  };
+</script>
+<script src="https://ewelinas-oase-chatbot.pages.dev/chatbot-widget-v2.js"></script>
 
 </body>
 </html>

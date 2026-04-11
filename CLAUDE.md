@@ -1,5 +1,5 @@
 # CLAUDE.md – Persistentes Gedächtnis für Dennis ("Big D")
-> Letzte Aktualisierung: 2026-04-10 (Nacht, Session 3)
+> Letzte Aktualisierung: 2026-04-11 (Session 4 – Full Audit + Critical Fixes)
 
 ## Wer ist Dennis?
 - Solo-Gründer, aktuell krankgeschrieben (Krankengeld, mentale Belastung), reine Lernphase
@@ -19,7 +19,9 @@
 - **Domain:** Bei IONOS, DNS CNAME www → ewelinasoase.pages.dev
 - **Google Search Console:** Verifiziert (HTML-Datei-Methode), Sitemap eingereicht, Seite indexiert
 - **Google Business Profile:** Existiert bereits (5.0★, 4 Bewertungen)
-- **Status:** Alles live – DSGVO, Maps-Consent, Honeypot, SEO, Chatbot v2 multi-tenant
+- **Status:** Live – DSGVO, Maps-Consent, Honeypot, SEO, Chatbot v2 multi-tenant, Fonts lokal (DSGVO-fix)
+- **Formular:** Aktuell WhatsApp-Fallback (kein VPS/n8n), Formulardaten werden als WhatsApp-Prefill geöffnet
+- **Altes Netlify-Deployment:** `glowing-kataifi-ed4931.netlify.app` – war noch als Script-Tag in index.html, ENTFERNT in Session 4. Netlify-Projekt kann gelöscht werden.
 
 ## Projekt-Struktur (`Ewelina Oase Final/local-business-system/`)
 ```
@@ -61,6 +63,7 @@ wrangler.toml                   – Cloudflare Pages Config
 - **Token-Sparen**: Max 20 Nachrichten History, temperature 0.7
 - **System-Prompt**: Kein Nagellack (bietet Mutter nicht an), medizinische Fragen → Arzt verweisen
 - **"Powered by WRBL Digital"** Footer im Widget
+- **DSGVO**: Widget lädt KEINE Google Fonts mehr extern (seit Session 4), nutzt Font der Host-Seite
 
 ## Tool-Stack
 | Tool | Zweck | Kosten |
@@ -159,10 +162,14 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 
 ## Bekannte Probleme / Offene Punkte
 1. **ewelinas-oase.de (ohne www) funktioniert nicht** – IONOS erlaubt keinen CNAME auf Root-Domain, Nameserver-Wechsel zu Cloudflare hat nicht geklappt
-2. **n8n läuft nur lokal** – Kontaktformular funktioniert nur wenn Dennis' PC an ist → Hetzner VPS nötig (aber erst kurz vor Gewerbeanmeldung, nicht jetzt)
+2. **n8n läuft nur lokal** – Formular nutzt jetzt WhatsApp-Fallback statt n8n-Webhook; Hetzner VPS nötig für echte Automationen (aber erst kurz vor Gewerbeanmeldung)
 3. **Airtable Base noch nicht angelegt** – Nur Docs, kein echtes Setup
-5. **End-to-End Test steht aus** – Website → Formular → n8n → Airtable → Benachrichtigung
-6. **Regelbasierter Chatbot** – Alternative zum AI-Chatbot als günstigere Option noch nicht gebaut
+4. **Chatbot: Kein Rate Limiting** – `/api/chat` kann gespammt werden, keine Input-Validierung (Nachrichtenlänge), kein Prompt-Injection-Schutz
+5. **Chatbot Widget: XSS-Risiko** – `cfg.greeting` und `cfg.business.short` werden als innerHTML gerendert, nicht escaped
+6. **index.html und generate.js sind out of sync** – Live-Seite wurde manuell editiert, weicht vom Template-Output ab. Sollte neu generiert werden.
+7. **Bewertungen sind statisch** – "vor 4 Mon." veraltet nie, hardcoded im HTML
+8. **Regelbasierter Chatbot** – Alternative zum AI-Chatbot als günstigere Option noch nicht gebaut
+9. **Netlify-Projekt noch aktiv** – `glowing-kataifi-ed4931.netlify.app` existiert noch, Script-Tag ist entfernt, Projekt kann im Dashboard gelöscht werden
 
 ### Erledigte Punkte (aus alter Liste)
 - ~~Chatbot-Widget nicht standalone~~ → v2 ist jetzt config-basiert und universal
@@ -171,6 +178,36 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 - ~~Multi-Tenant Chatbot~~ → Backend v2 mit CLIENTS-Objekt
 - ~~Canonical-Tag falsch~~ → Gefixt auf www.ewelinas-oase.de, deployed + gepusht
 - ~~Versehentlich erstelltes Cloudflare-Projekt "ewelinasoas"~~ → Gelöscht in Session 3
+- ~~Netlify-Script in index.html~~ → Entfernt in Session 4
+- ~~Chatbot v1 statt v2 auf Live-Seite~~ → v2 mit WRBL_CHAT_CONFIG in Session 4
+- ~~Kontaktformular kaputt (localhost:5678)~~ → WhatsApp-Fallback in Session 4
+- ~~Nagellack-Widerspruch (Website vs. Chatbot)~~ → Überall entfernt in Session 4
+- ~~Google Fonts extern geladen (DSGVO-Risiko)~~ → Fonts lokal via @font-face in Session 4
+- ~~Canonical/og:url auf ewelinas-oase.de statt www~~ → Alle URLs auf www gefixt in Session 4
+- ~~Samstag Öffnungszeiten Schema-Widerspruch~~ → Schema korrigiert in Session 4
+- ~~.gitignore UTF-16 Encoding~~ → Neugeschrieben als UTF-8, .netlify/ hinzugefügt in Session 4
+
+### Session 4 (11.04. – Full Audit + Critical Fixes)
+- **Full Project Audit durchgeführt:** Code, Security, DSGVO, SEO, Business, Architektur – komplett
+- **Gesamtbewertung: 6/10** – optisch gut, technisch an mehreren Stellen kaputt/inkonsistent
+- **7 kritische Fixes umgesetzt:**
+  1. Netlify-Skript entfernt (`glowing-kataifi-ed4931.netlify.app/widget.js` – altes Deployment, Sicherheitsrisiko)
+  2. Chatbot v1 → v2 auf Live-Seite (mit `WRBL_CHAT_CONFIG` Block)
+  3. Kontaktformular: `localhost:5678` → WhatsApp-Deeplink-Fallback (Formulardaten als WhatsApp-Prefill)
+  4. Nagellack-Widerspruch bereinigt: Website, config.json, dist/, Chatbot public/index.html – überall entfernt
+  5. Canonical URL + og:url + og:image + Schema.org + sitemap.xml + robots.txt → alle auf `www.ewelinas-oase.de`
+  6. Google Fonts: extern (fonts.googleapis.com) → lokal via @font-face (DSGVO-Fix, .ttf-Dateien waren schon da)
+  7. Chatbot Widget v2: Google Fonts Loading entfernt, nutzt Font der Host-Seite
+- **Bonus-Fixes:**
+  - Samstag Schema-Öffnungszeiten korrigiert (14:00 → 20:00 mit Vereinbarungs-Hinweis)
+  - `.gitignore` von UTF-16 auf UTF-8 neugeschrieben, `.netlify/` hinzugefügt
+  - Chatbot public/index.html: "Nagellack +7€" → "Inkl. Fußbad, Peeling, Massage"
+- **Noch nicht gefixt (benötigt weitere Arbeit):**
+  - Chatbot Rate Limiting + Input-Validation + Prompt-Injection-Schutz
+  - Widget XSS (innerHTML statt textContent für Config-Werte)
+  - index.html ↔ generate.js Sync (Live-Seite manuell editiert, weicht vom Generator ab)
+  - CSS-Variablen kryptisch (--c, --t etc.) → sprechende Namen
+  - Keine Favicon-Datei
 
 ## Langfrist-Vision
 - Mehrere Branchen-Templates (Fußpflege ✅, Friseur ✅, Handwerker ✅, Kosmetik, Gastro...)
@@ -180,9 +217,10 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 - Agentur-Landingpage veröffentlichen (nach Gewerbeanmeldung)
 
 ## Wichtige Pfade (Windows)
-- Website-Repo: `C:\Users\Home\Desktop\Ewelina Oase Final\`
-- Chatbot-Repo: `C:\Users\Home\Desktop\AI-Chatbot\` (NICHT `C:\Users\Home\AI-Chatbot`)
-- `.gitignore` in beiden Repos enthält: `.claude/`, `.wrangler/`
+- Website-Repo: `C:\Users\denni\Ewelina Oase Final\`
+- Chatbot-Repo: `C:\Users\denni\AI-Chatbot\`
+- `.gitignore` Website-Repo enthält: `.claude/`, `.wrangler/`, `.netlify/`, `dist-friseur/`, `dist-handwerker/`
+- `.gitignore` Chatbot-Repo enthält: `.claude/`, `.wrangler/`
 
 ## Regeln für Claude
 - Deutsch sprechen, direkt und ehrlich sein

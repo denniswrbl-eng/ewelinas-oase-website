@@ -79,7 +79,7 @@
     "sectionTitle": "Professionelle <em>Fußpflege</em>",
     "mainService": {
       "intro": "Deine Zeit, deine Auszeit. Kein Stress, kein Hetzen – nur du, deine Füße und eine ruhige Stunde, die du dir verdient hast.",
-      "description": "Deine Füße werden in einem warmen, aromatischen Fußbad gebadet, sanft gepeelt und von Hornhaut befreit. Anschließend folgt eine wohltuende Massage – und auf Wunsch ein Nagellack in deiner Lieblingsfarbe.",
+      "description": "Deine Füße werden in einem warmen, aromatischen Fußbad gebadet, sanft gepeelt und von Hornhaut befreit. Anschließend werden die Nägel sorgfältig gekürzt und gefeilt, bevor eine wohltuende Massage den Abschluss bildet.",
       "checks": [
         "Fußbad, Peeling & Hornhautentfernung inklusive",
         "Persönliche Betreuung – kein Fließbandbetrieb",
@@ -89,7 +89,7 @@
       "price": "35 €",
       "duration": "ca. 45 Minuten · Termine nach Vereinbarung"
     },
-    "imageLabels": ["Massage", "Nagellack auf Wunsch", "Ergebnis"],
+    "imageLabels": ["Massage", "Nagelpflege", "Ergebnis"],
     "formOptions": [
       { "label": "Fußpflege (35 €)" },
       { "label": "Termin auf individuelle Anfrage" }
