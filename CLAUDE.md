@@ -1,5 +1,5 @@
 # CLAUDE.md – Persistentes Gedächtnis für Dennis ("Big D")
-> Letzte Aktualisierung: 2026-04-11 (Session 4 – Full Audit + Critical Fixes)
+> Letzte Aktualisierung: 2026-04-11 (Session 6 – Formular-Backend + Airtable Integration)
 
 ## Wer ist Dennis?
 - Solo-Gründer, aktuell krankgeschrieben (Krankengeld, mentale Belastung), reine Lernphase
@@ -20,7 +20,12 @@
 - **Google Search Console:** Verifiziert (HTML-Datei-Methode), Sitemap eingereicht, Seite indexiert
 - **Google Business Profile:** Existiert bereits (5.0★, 4 Bewertungen)
 - **Status:** Live – DSGVO, Maps-Consent, Honeypot, SEO, Chatbot v2 multi-tenant, Fonts lokal (DSGVO-fix)
-- **Formular:** Aktuell WhatsApp-Fallback (kein VPS/n8n), Formulardaten werden als WhatsApp-Prefill geöffnet
+- **Formular:** Dual-Flow: Daten → Cloudflare Worker `/api/form` → Airtable CRM + WhatsApp-Deeplink als Fallback ✅ LIVE
+- **Airtable CRM:** "Local Busienss CRM" (Typo im Namen), Base-ID: `app9kLLaDhUOHINFU`, Tabelle "Anfragen" (`tblk0RXcSfYELhHMN`)
+  - Felder: Name, Email, Telefon, Status, Leistungen, Wunschtermin, Quelle, Kunde, Bewertung Angefragt, Erstellt am
+  - 4 Testdatensätze vorhanden (vom 09.-10.04.2026, über n8n eingespielt)
+  - Pro-Trial läuft ab ca. 22.04.2026, danach Free-Plan (1.000 Records – reicht erstmal)
+  - Läuft auf dennis.wrbl@gmail.com
 - **Altes Netlify-Deployment:** `glowing-kataifi-ed4931.netlify.app` – war noch als Script-Tag in index.html, ENTFERNT in Session 4. Netlify-Projekt kann gelöscht werden.
 
 ## Projekt-Struktur (`Ewelina Oase Final/local-business-system/`)
@@ -47,7 +52,8 @@ dist/google12ae90ebd971bd23.html – Google Search Console Verification (NICHT L
 
 ## Chatbot-Repo (`AI-Chatbot/` bzw. `denniswrbl-eng/ewelinas-oase-chatbot`)
 ```
-functions/api/chat.js           – Multi-Tenant Backend v2 (CLIENTS-Objekt pro Kunde)
+functions/api/chat.js           – Multi-Tenant Chatbot Backend v2 (CLIENTS-Objekt pro Kunde)
+functions/api/form.js           – Formular-Backend v1 (Formulardaten → Airtable CRM)
 public/chatbot-widget.js        – Widget v1 (alt, hardcoded für Ewelinas Oase)
 public/chatbot-widget-v2.js     – Widget v2 (config-basiert, window.WRBL_CHAT_CONFIG)
 chatbot-widget-v2.js            – Source des v2 Widgets
@@ -163,7 +169,7 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 ## Bekannte Probleme / Offene Punkte
 1. **ewelinas-oase.de (ohne www) funktioniert nicht** – IONOS erlaubt keinen CNAME auf Root-Domain, Nameserver-Wechsel zu Cloudflare hat nicht geklappt
 2. **n8n läuft nur lokal** – Formular nutzt jetzt WhatsApp-Fallback statt n8n-Webhook; Hetzner VPS nötig für echte Automationen (aber erst kurz vor Gewerbeanmeldung)
-3. **Airtable Base noch nicht angelegt** – Nur Docs, kein echtes Setup
+3. ~~**Airtable Base noch nicht angelegt**~~ → Existiert + Formular-Backend funktioniert! End-to-End Flow live seit 11.04.2026
 4. **Chatbot: Kein Rate Limiting** – `/api/chat` kann gespammt werden, keine Input-Validierung (Nachrichtenlänge), kein Prompt-Injection-Schutz
 5. **Chatbot Widget: XSS-Risiko** – `cfg.greeting` und `cfg.business.short` werden als innerHTML gerendert, nicht escaped
 6. **index.html und generate.js sind out of sync** – Live-Seite wurde manuell editiert, weicht vom Template-Output ab. Sollte neu generiert werden.
@@ -209,12 +215,52 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
   - CSS-Variablen kryptisch (--c, --t etc.) → sprechende Namen
   - Keine Favicon-Datei
 
+### Session 5 (11.04. – Git Push + Airtable)
+- **Alle Session-4-Fixes committed + gepusht** (beide Repos)
+  - Website-Repo: `912403f` – 8 Dateien, 103 insertions, 42 deletions
+  - Chatbot-Repo: `2521adc` – 3 Dateien (Widget Fonts + Nagellack)
+- **Cloudflare deployed automatisch** nach Push – alle Fixes jetzt live
+- **.gitignore nochmal gefixt** (war wieder UTF-16 geworden, erneut als UTF-8 geschrieben)
+- **Airtable CRM entdeckt:** Existierte bereits, 4 Testdatensätze, Pro-Trial (noch 11 Tage)
+
+### Session 6 (11.04. – Formular-Backend + Airtable Integration)
+- **Formular-Backend gebaut:** `functions/api/form.js` im Chatbot-Repo
+  - Empfängt Formulardaten (Name, Email, Telefon, Leistung, Wunschtermin)
+  - Schreibt in Airtable CRM via API
+  - Honeypot-Spam-Schutz
+  - CORS pro Client konfiguriert
+  - Fehlerdetails in Response für Debugging
+- **index.html Kontaktformular umgebaut:**
+  - Sendet Daten per `fetch()` an `/api/form` → Airtable
+  - WhatsApp-Deeplink öffnet sich danach (auch bei Backend-Fehler als Fallback)
+- **Node.js + Wrangler auf Laptop installiert** (npm global)
+- **Deploy-Workflow jetzt klar:**
+  - Website: `npx wrangler pages deploy . --project-name=ewelinasoase`
+  - Chatbot: `npx wrangler pages deploy public --project-name=ewelinas-oase-chatbot`
+  - WICHTIG: Cloudflare hat KEINE Git-Verbindung → Push allein reicht nicht, muss manuell mit Wrangler deployed werden!
+- **Cloudflare Environment Variables:**
+  - `GROQ_API_KEY` – für Chatbot LLM (war schon da)
+  - `AIRTABLE_TOKEN` – für Formular-Backend (neu, verschlüsselt)
+- **Git Commits:**
+  - Chatbot-Repo: `f61c382` – form.js Backend
+  - Website-Repo: `cc9074e` – Formular fetch() statt reiner WhatsApp-Fallback
+- **Airtable-Probleme gelöst:**
+  - Base-ID war falsch: `I` (großes i) statt `l` (kleines L) — `app9kLLaDhUOHlNFU` ist korrekt
+  - Select-Felder (Leistungen, Status, Quelle, Kunde) blockierten API-Writes → Workaround: nur Text-Felder beschreiben
+  - Token braucht Scopes: `data.records:read`, `data.records:write`, `schema.bases:read`, `schema.bases:write`
+- **FORMULAR FUNKTIONIERT END-TO-END:** Website-Formular → Airtable CRM + WhatsApp-Deeplink ✅
+
 ## Langfrist-Vision
 - Mehrere Branchen-Templates (Fußpflege ✅, Friseur ✅, Handwerker ✅, Kosmetik, Gastro...)
 - Kunden-Onboarding automatisiert (Fragebogen → Config → Website)
 - Multi-Tenant Chatbot ✅ (1 Worker für alle Kunden)
 - Eventuell SaaS-Richtung
 - Agentur-Landingpage veröffentlichen (nach Gewerbeanmeldung)
+
+## Deploy-Befehle (PowerShell)
+- Website: `cd "C:\Users\denni\Ewelina Oase Final" && npx wrangler pages deploy . --project-name=ewelinasoase`
+- Chatbot: `cd "C:\Users\denni\AI-Chatbot" && npx wrangler pages deploy public --project-name=ewelinas-oase-chatbot`
+- ACHTUNG: Cloudflare hat keine Git-Verbindung! `git push` allein deployed NICHT. Immer Wrangler nutzen.
 
 ## Wichtige Pfade (Windows)
 - Website-Repo: `C:\Users\denni\Ewelina Oase Final\`
