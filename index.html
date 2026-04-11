@@ -668,22 +668,38 @@
       email: form.email.value,
       phone: form.phone.value,
       service: form.service.value,
-      preferred_date: form.preferred_date.value,
-      source: 'Website-Formular',
-      client: 'Ewelinas Oase'
+      preferredDate: form.preferred_date.value,
+      clientId: 'ewelinas-oase'
     };
 
-    // WhatsApp-Fallback: Formulardaten als WhatsApp-Nachricht öffnen
+    // WhatsApp-Nachricht vorbereiten
     var waText = 'Hallo Ewelina,%0A%0A'
       + 'ich möchte gerne einen Termin anfragen.%0A%0A'
       + 'Name: ' + encodeURIComponent(data.name) + '%0A'
       + 'Telefon: ' + encodeURIComponent(data.phone) + '%0A'
       + 'Leistung: ' + encodeURIComponent(data.service) + '%0A'
-      + 'Wunschtermin: ' + encodeURIComponent(data.preferred_date) + '%0A';
-    window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
-    ok.style.display = 'block';
-    form.reset();
-    btn.textContent = 'Gesendet ✓';
+      + 'Wunschtermin: ' + encodeURIComponent(data.preferredDate) + '%0A';
+
+    // 1. Daten ans Backend senden (→ Airtable CRM)
+    fetch('https://ewelinas-oase-chatbot.pages.dev/api/form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function() {
+      // 2. WhatsApp öffnen (egal ob Backend ok oder nicht)
+      window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
+      ok.style.display = 'block';
+      form.reset();
+      btn.textContent = 'Gesendet ✓';
+    })
+    .catch(function() {
+      // Fallback: WhatsApp trotzdem öffnen wenn Backend nicht erreichbar
+      window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
+      ok.style.display = 'block';
+      form.reset();
+      btn.textContent = 'Gesendet ✓';
+    });
   }
 
   // Modals
