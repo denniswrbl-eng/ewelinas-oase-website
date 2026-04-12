@@ -23,7 +23,7 @@
     "phoneDisplay": "0234 / 123 45 67",
     "email": "info@elektro-schuster.de",
     "whatsapp": "491751234567",
-    "webhookUrl": "https://n8n.deine-domain.de/webhook/anfrage"
+    "formApiUrl": ""
   },
 
   "address": {

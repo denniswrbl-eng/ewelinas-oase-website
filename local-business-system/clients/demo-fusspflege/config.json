@@ -23,7 +23,7 @@
     "phoneDisplay": "0176 / 31 56 24 54",
     "email": "info@ewelinas-oase.de",
     "whatsapp": "4917631562454",
-    "webhookUrl": "http://localhost:5678/webhook/anfrage"
+    "formApiUrl": "https://ewelinas-oase-chatbot.pages.dev/api/form"
   },
 
   "address": {
@@ -132,10 +132,10 @@
     "count": "4",
     "googleSearchUrl": "https://www.google.com/search?q=Ewelinas+Oase+Hamm+Bewertungen",
     "items": [
-      { "initial": "A", "name": "as bi", "date": "vor 4 Mon.", "text": "Schöner Salon, alles sauber, sehr nette Inhaberin. Perfektes Ergebnis!" },
-      { "initial": "S", "name": "Swegumbre", "date": "vor 10 Mon.", "text": "Absolut empfehlenswert! Professionell, gründlich, hygienisch." },
-      { "initial": "M", "name": "Martina V.", "date": "vor 11 Mon.", "text": "Sehr zufrieden! Freundlich und lustig. Würde 10 Sterne geben!" },
-      { "initial": "D", "name": "Dagmar", "date": "vor 1 Jahr", "text": "Mein Mann ist sehr zufrieden mit der Fußpflege." }
+      { "initial": "A", "name": "as bi", "date": "2025-12-01", "text": "Schöner Salon, alles sauber, sehr nette Inhaberin. Perfektes Ergebnis!" },
+      { "initial": "S", "name": "Swegumbre", "date": "2025-06-01", "text": "Absolut empfehlenswert! Professionell, gründlich, hygienisch." },
+      { "initial": "M", "name": "Martina V.", "date": "2025-05-01", "text": "Sehr zufrieden! Freundlich und lustig. Würde 10 Sterne geben!" },
+      { "initial": "D", "name": "Dagmar", "date": "2025-04-01", "text": "Mein Mann ist sehr zufrieden mit der Fußpflege." }
     ]
   },
 
@@ -184,6 +184,15 @@
       "subject": "Wie war Ihr Besuch? – Ewelinas Oase",
       "body": "Hallo {{name}},\n\nwir hoffen, Sie waren zufrieden mit Ihrem Besuch bei Ewelinas Oase. Über eine Google-Bewertung würden wir uns sehr freuen:\n\nhttps://www.google.com/search?q=Ewelinas+Oase+Hamm+Bewertungen\n\nHerzliche Grüße,\nEwelina"
     }
+  },
+
+  "seo": {
+    "faq": [
+      { "question": "Was kostet eine Fußpflege bei Ewelinas Oase?", "answer": "Eine professionelle Fußpflege-Behandlung kostet 35€ und dauert ca. 45 Minuten. Inkl. Fußbad, Peeling, Hornhautentfernung, Nagelpflege und Massage." },
+      { "question": "Wann hat Ewelinas Oase geöffnet?", "answer": "Montag bis Freitag von 08:00 bis 20:00 Uhr. Samstags nach Vereinbarung. Sonntags geschlossen." },
+      { "question": "Wo befindet sich Ewelinas Oase?", "answer": "Ewelinas Oase befindet sich in der Ostenallee 55, 59063 Hamm." },
+      { "question": "Wie kann ich einen Termin buchen?", "answer": "Per WhatsApp an 0176 / 31 56 24 54, telefonisch oder über das Kontaktformular auf der Website." }
+    ]
   },
 
   "onboarding": {

@@ -8,13 +8,13 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.ewelinas-oase.de/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <!-- Fonts: lokal eingebunden (DSGVO-konform, keine externen Requests) -->
+  <!-- Fonts lokal geladen (DSGVO-konform, keine Datenübertragung an Google) -->
   <style>
-    @font-face { font-family: "Cormorant Garamond"; src: url("fonts/cormorant-garamond-300.ttf") format("truetype"); font-weight: 300; font-style: normal; font-display: swap; }
-    @font-face { font-family: "Cormorant Garamond"; src: url("fonts/cormorant-garamond-300-italic.ttf") format("truetype"); font-weight: 300; font-style: italic; font-display: swap; }
-    @font-face { font-family: "Jost"; src: url("fonts/jost-300.ttf") format("truetype"); font-weight: 300; font-style: normal; font-display: swap; }
-    @font-face { font-family: "Jost"; src: url("fonts/jost-400.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
-    @font-face { font-family: "Jost"; src: url("fonts/jost-500.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Cormorant Garamond'; src: url('fonts/cormorant-garamond-300.ttf') format('truetype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Cormorant Garamond'; src: url('fonts/cormorant-garamond-300-italic.ttf') format('truetype'); font-weight: 300; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Jost'; src: url('fonts/jost-300.ttf') format('truetype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Jost'; src: url('fonts/jost-400.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Jost'; src: url('fonts/jost-500.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
   </style>
 
   <!-- Open Graph -->
@@ -62,58 +62,11 @@
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": "Saturday",
       "opens": "08:00",
-      "closes": "20:00"
+      "closes": "20:00",
+      "description": "Termine nach Vereinbarung"
     }
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "4",
-    "bestRating": "5"
-  },
   "priceRange": "€"
-}
-  </script>
-
-  <!-- FAQ Schema (für Google Rich Results) -->
-  <script type="application/ld+json">
-  {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Was kostet eine Fußpflege bei Ewelinas Oase?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Eine professionelle Fußpflege-Behandlung kostet 35€ und dauert ca. 45 Minuten. Inkl. Fußbad, Peeling, Hornhautentfernung, Nagelpflege und Massage."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wann hat Ewelinas Oase geöffnet?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Montag bis Freitag von 08:00 bis 20:00 Uhr. Samstags nach Vereinbarung. Sonntags geschlossen."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wo befindet sich Ewelinas Oase?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ewelinas Oase befindet sich in der Ostenallee 55, 59063 Hamm."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie kann ich einen Termin buchen?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Per WhatsApp an 0176 / 31 56 24 54, telefonisch oder über das Kontaktformular auf der Website."
-      }
-    }
-  ]
 }
   </script>
 
@@ -278,15 +231,8 @@
     .footer-links{margin-top:1rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
     .footer-link{background:none;border:none;color:var(--accent-light);font-family:'Jost',sans-serif;font-size:.82rem;cursor:pointer;text-decoration:underline;padding:0}
 
-    /* ── WA FLOW BUTTONS ── */
-    .wa-flow{margin:1.8rem 0 1.2rem;text-align:center}
-    .wa-flow-title{font-size:.82rem;color:var(--muted);margin-bottom:.8rem;font-weight:500}
-    .wa-flow-btns{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
-    .wa-flow-btn{display:inline-flex;align-items:center;gap:.4rem;background:#25d366;color:#fff;padding:.55rem 1.2rem;border-radius:50px;font-size:.78rem;font-weight:500;font-family:"Jost",sans-serif;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(37,211,102,.2)}
-    .wa-flow-btn:hover{background:#1fb855;transform:translateY(-1px);box-shadow:0 4px 14px rgba(37,211,102,.35)}
-
     /* ── WA FLOAT ── */
-    .wa-fab{position:fixed;bottom:5.5rem;right:5.5rem;z-index:99998;background:#25d366;color:#fff;border-radius:50px;padding:.7rem 1.1rem;display:flex;align-items:center;gap:.45rem;font-family:"Jost",sans-serif;font-size:.78rem;font-weight:500;box-shadow:0 4px 18px rgba(37,211,102,.4);-webkit-tap-highlight-color:transparent}
+    .wa-fab{position:fixed;bottom:6rem;right:1rem;z-index:99998;background:#25d366;color:#fff;border-radius:50px;padding:.7rem 1.1rem;display:flex;align-items:center;gap:.45rem;font-family:"Jost",sans-serif;font-size:.78rem;font-weight:500;box-shadow:0 4px 18px rgba(37,211,102,.4);-webkit-tap-highlight-color:transparent}
 
     /* ── COOKIE ── */
     .cookie-bar{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--dark);color:rgba(255,255,255,.85);padding:1rem 1.25rem;display:flex;flex-direction:column;gap:.8rem;box-shadow:0 -4px 24px rgba(61,31,43,.2)}
@@ -392,7 +338,7 @@
     <h1>Deine Füße verdienen das <em>Beste</em></h1>
     <p>Professionelle Fußpflege in Hamm – persönlich, hygienisch, mit Liebe. Gönn dir eine Auszeit.</p>
     <div class="hero-btns">
-      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20interessiere%20mich%20f%C3%BCr%20eine%20Fu%C3%9Fpflege-Behandlung%20(35%E2%82%AC).%0AWann%20w%C3%A4re%20ein%20Termin%20m%C3%B6glich%3F%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="btn btn-fill">💬 WhatsApp</a>
+      <a href="https://wa.me/4917631562454" target="_blank" rel="noopener noreferrer" class="btn btn-fill">💬 WhatsApp</a>
       <a href="#kontakt" class="btn btn-ghost">Termin anfragen</a>
     </div>
     <div class="hero-stats">
@@ -428,14 +374,6 @@
         </div>
         <a href="#kontakt" class="btn btn-fill">Termin anfragen</a>
       </div>
-    </div>
-  </div>
-  <div class="wa-flow">
-    <p class="wa-flow-title">Direkt per WhatsApp buchen:</p>
-    <div class="wa-flow-btns">
-      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20interessiere%20mich%20f%C3%BCr%20eine%20Fu%C3%9Fpflege-Behandlung%20(35%E2%82%AC).%0AWann%20w%C3%A4re%20ein%20Termin%20m%C3%B6glich%3F%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn">💬 Fußpflege Komplett (35 €)</a>
-      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20m%C3%B6chte%20gerne%20einen%20Termin%20f%C3%BCr%20eine%20Fu%C3%9Fpflege%20vereinbaren.%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn">💬 Termin vereinbaren</a>
-      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20habe%20eine%20Frage%20zu%20Ihren%20Leistungen.%0A%0AMein%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn">💬 Allgemeine Anfrage</a>
     </div>
   </div>
   <div class="leis-imgs">
@@ -545,7 +483,7 @@
     <a href="tel:+4917631562454" class="tile">
       <div class="tile-ico">📞</div><div class="tile-lbl">Anrufen</div><div class="tile-val">0176 / 31 56 24 54</div>
     </a>
-    <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20habe%20eine%20Frage%20zu%20Ihren%20Leistungen.%0A%0AMein%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer" class="tile wa">
+    <a href="https://wa.me/4917631562454" target="_blank" rel="noopener noreferrer" class="tile wa">
       <div class="tile-ico">💬</div><div class="tile-lbl">WhatsApp</div><div class="tile-val">Jetzt schreiben</div>
     </a>
     <div class="tile">
@@ -585,7 +523,7 @@
 </main>
 
 <!-- WA FLOAT -->
-<a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20habe%20eine%20Frage%20zu%20Ihren%20Leistungen.%0A%0AMein%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer" class="wa-fab" aria-label="WhatsApp Kontakt">💬 WhatsApp</a>
+<a href="https://wa.me/4917631562454" target="_blank" rel="noopener noreferrer" class="wa-fab" aria-label="WhatsApp Kontakt">💬 WhatsApp</a>
 
 <!-- FOOTER -->
 <footer>
@@ -713,7 +651,7 @@
   // Auto-load map if user already consented
   try { if (localStorage.getItem('map_consent')) loadMap(); } catch(e) {}
 
-  // Form Submit → Airtable API + WhatsApp-Fallback
+  // Form Submit → n8n Webhook (mit Honeypot-Schutz)
   function send(e) {
     e.preventDefault();
     var form = document.getElementById('form');
@@ -735,28 +673,34 @@
       clientId: 'ewelinas-oase'
     };
 
-    // WhatsApp-Nachricht zusammenbauen
+    // WhatsApp-Nachricht vorbereiten
     var waText = 'Hallo Ewelina,%0A%0A'
       + 'ich möchte gerne einen Termin anfragen.%0A%0A'
-      + 'Name: ' + encodeURIComponent(form.name.value) + '%0A'
-      + 'Telefon: ' + encodeURIComponent(form.phone.value) + '%0A'
-      + 'Leistung: ' + encodeURIComponent(form.service.value) + '%0A'
-      + 'Wunschtermin: ' + encodeURIComponent(form.preferred_date.value);
+      + 'Name: ' + encodeURIComponent(data.name) + '%0A'
+      + 'Telefon: ' + encodeURIComponent(data.phone) + '%0A'
+      + 'Leistung: ' + encodeURIComponent(data.service) + '%0A'
+      + 'Wunschtermin: ' + encodeURIComponent(data.preferredDate) + '%0A';
 
+    // 1. Daten ans Backend senden (→ Airtable CRM)
     fetch('https://ewelinas-oase-chatbot.pages.dev/api/form', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
-      .then(function() {
-        window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
-        ok.style.display = 'block'; form.reset(); btn.textContent = 'Gesendet ✓';
-      })
-      .catch(function() {
-        // Fallback: WhatsApp öffnet sich auch wenn Backend fehlt
-        window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
-        ok.style.display = 'block'; form.reset(); btn.textContent = 'Gesendet ✓';
-      });
+    .then(function() {
+      // 2. WhatsApp öffnen (egal ob Backend ok oder nicht)
+      window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
+      ok.style.display = 'block';
+      form.reset();
+      btn.textContent = 'Gesendet ✓';
+    })
+    .catch(function() {
+      // Fallback: WhatsApp trotzdem öffnen wenn Backend nicht erreichbar
+      window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
+      ok.style.display = 'block';
+      form.reset();
+      btn.textContent = 'Gesendet ✓';
+    });
   }
 
   // Modals
@@ -770,7 +714,7 @@
   try { if (localStorage.getItem('cookies')) document.getElementById('cookie-bar').classList.add('hidden'); } catch(e) {}
 </script>
 
-<!-- Chatbot Widget v2 -->
+<!-- Chatbot v2 (config-basiert, multi-tenant) -->
 <script>
   window.WRBL_CHAT_CONFIG = {
     apiUrl: "https://ewelinas-oase-chatbot.pages.dev/api/chat",
@@ -779,13 +723,16 @@
     theme: { primary: "#d4607a", primaryHover: "#6b3a4a" },
     greeting: "Hallo! Schön, dass du vorbeischaust. Wie kann ich dir helfen? 😊",
     subtitle: "Meistens antworte ich sofort",
-    quickReplies: [{"label":"Preise","msg":"Was kostet eine Fußpflege?"},{"label":"Öffnungszeiten","msg":"Wann habt ihr geöffnet?"},{"label":"Termin buchen","msg":"Ich möchte einen Termin buchen"},{"label":"Adresse","msg":"Wo ist der Salon?"}],
+    quickReplies: [
+      { label: "Preise", msg: "Was kostet eine Fußpflege?" },
+      { label: "Öffnungszeiten", msg: "Wann habt ihr geöffnet?" },
+      { label: "Termin buchen", msg: "Ich möchte einen Termin buchen" },
+      { label: "Adresse", msg: "Wo ist der Salon?" }
+    ],
     font: "Jost"
   };
 </script>
 <script src="https://ewelinas-oase-chatbot.pages.dev/chatbot-widget-v2.js"></script>
-
-
 
 </body>
 </html>

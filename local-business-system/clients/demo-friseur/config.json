@@ -23,7 +23,7 @@
     "phoneDisplay": "0176 / 123 45 67",
     "email": "info@salon-bella.de",
     "whatsapp": "491761234567",
-    "webhookUrl": "https://n8n.deine-domain.de/webhook/anfrage"
+    "formApiUrl": ""
   },
 
   "address": {

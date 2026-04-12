@@ -1,5 +1,5 @@
 # CLAUDE.md – Persistentes Gedächtnis für Dennis ("Big D")
-> Letzte Aktualisierung: 2026-04-11 (Session 6 – Formular-Backend + Airtable Integration)
+> Letzte Aktualisierung: 2026-04-12 (Session 7 – Bugfixes, Sync, IONOS Domain-Fix)
 
 ## Wer ist Dennis?
 - Solo-Gründer, aktuell krankgeschrieben (Krankengeld, mentale Belastung), reine Lernphase
@@ -21,12 +21,12 @@
 - **Google Business Profile:** Existiert bereits (5.0★, 4 Bewertungen)
 - **Status:** Live – DSGVO, Maps-Consent, Honeypot, SEO, Chatbot v2 multi-tenant, Fonts lokal (DSGVO-fix)
 - **Formular:** Dual-Flow: Daten → Cloudflare Worker `/api/form` → Airtable CRM + WhatsApp-Deeplink als Fallback ✅ LIVE
-- **Airtable CRM:** "Local Busienss CRM" (Typo im Namen), Base-ID: `app9kLLaDhUOHINFU`, Tabelle "Anfragen" (`tblk0RXcSfYELhHMN`)
+- **Airtable CRM:** "Local Busienss CRM" (Typo im Namen), Base-ID: `app9kLLaDhUOHlNFU`, Tabelle "Anfragen" (`tblk0RXcSfYELhHMN`)
   - Felder: Name, Email, Telefon, Status, Leistungen, Wunschtermin, Quelle, Kunde, Bewertung Angefragt, Erstellt am
   - 4 Testdatensätze vorhanden (vom 09.-10.04.2026, über n8n eingespielt)
   - Pro-Trial läuft ab ca. 22.04.2026, danach Free-Plan (1.000 Records – reicht erstmal)
   - Läuft auf dennis.wrbl@gmail.com
-- **Altes Netlify-Deployment:** `glowing-kataifi-ed4931.netlify.app` – war noch als Script-Tag in index.html, ENTFERNT in Session 4. Netlify-Projekt kann gelöscht werden.
+- **Altes Netlify-Deployment:** `glowing-kataifi-ed4931.netlify.app` – Script-Tag entfernt (Session 4), Projekt gelöscht (Session 7)
 
 ## Projekt-Struktur (`Ewelina Oase Final/local-business-system/`)
 ```
@@ -45,6 +45,8 @@ docs/setup-guide.md            – Komplett-Guide (Docker, n8n, Hetzner, Cloudfl
 docs/laptop-setup-guide.md     – Lokale Entwicklungsumgebung
 docs/tool-stack.md              – Alle Tools + Kosten (inkl. Groq/Workers, ohne Formspree)
 docs/neuer-kunde.md             – Onboarding-Workflow
+docs/airtable-fix.md           – Anleitung: Select-Felder → Single line text
+docs/netlify-loeschen.md       – Anleitung: Netlify-Projekt löschen
 chatbot/                        – (leer, Chatbot ist im separaten Repo)
 dist/                           – Generierter Output (deployed auf Cloudflare)
 dist/google12ae90ebd971bd23.html – Google Search Console Verification (NICHT LÖSCHEN)
@@ -81,7 +83,7 @@ wrangler.toml                   – Cloudflare Pages Config
 | RTX 3060 12GB | GPU für lokale AI | Hardware |
 | Cloudflare Pages | Hosting pro Kunde | Kostenlos |
 | Cloudflare Pages Functions | Chatbot Backend (multi-tenant) | Kostenlos |
-| Groq API (LLaMA 3.3 70B) | LLM für Chatbot | Kostenlos |
+| Groq API (Qwen QWQ 32B) | LLM für Chatbot | Kostenlos |
 | Airtable Free | CRM (bis 1.000 Records) | Kostenlos |
 | Docker + n8n (lokal) | Automationen | Kostenlos |
 | GitHub | Versionskontrolle | Kostenlos |
@@ -167,15 +169,17 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
 - Git: Beide Repos committed + gepusht (sauber, keine Secrets)
 
 ## Bekannte Probleme / Offene Punkte
-1. **ewelinas-oase.de (ohne www) funktioniert nicht** – IONOS erlaubt keinen CNAME auf Root-Domain, Nameserver-Wechsel zu Cloudflare hat nicht geklappt
+1. ~~**ewelinas-oase.de (ohne www) funktioniert nicht**~~ → IONOS Domain-Weiterleitung eingerichtet: ewelinas-oase.de → https://www.ewelinas-oase.de (HTTP-Redirect, ohne www-Subdomain-Option) in Session 7
 2. **n8n läuft nur lokal** – Formular nutzt jetzt WhatsApp-Fallback statt n8n-Webhook; Hetzner VPS nötig für echte Automationen (aber erst kurz vor Gewerbeanmeldung)
 3. ~~**Airtable Base noch nicht angelegt**~~ → Existiert + Formular-Backend funktioniert! End-to-End Flow live seit 11.04.2026
-4. **Chatbot: Kein Rate Limiting** – `/api/chat` kann gespammt werden, keine Input-Validierung (Nachrichtenlänge), kein Prompt-Injection-Schutz
-5. **Chatbot Widget: XSS-Risiko** – `cfg.greeting` und `cfg.business.short` werden als innerHTML gerendert, nicht escaped
-6. **index.html und generate.js sind out of sync** – Live-Seite wurde manuell editiert, weicht vom Template-Output ab. Sollte neu generiert werden.
-7. **Bewertungen sind statisch** – "vor 4 Mon." veraltet nie, hardcoded im HTML
+4. ~~**Chatbot: Kein Rate Limiting**~~ → Rate Limiting (10 Req/Min/IP), Input-Validierung (500 Zeichen max), Message-Sanitization in Session 6 eingebaut
+5. ~~**Chatbot Widget: XSS-Risiko**~~ → `esc()` Funktion für alle Config-Werte (greeting, business.short/name, subtitle, quickReplies) in Session 6
+6. ~~**index.html und generate.js sind out of sync**~~ → index.html komplett neu generiert aus config.json in Session 7 (Backup: index.html.backup-20260412)
+7. ~~**Bewertungen sind statisch**~~ → timeAgo() Funktion in generate.js nutzt jetzt echte Datumswerte aus config.json, berechnet dynamisch "vor X Monaten" in Session 7
 8. **Regelbasierter Chatbot** – Alternative zum AI-Chatbot als günstigere Option noch nicht gebaut
-9. **Netlify-Projekt noch aktiv** – `glowing-kataifi-ed4931.netlify.app` existiert noch, Script-Tag ist entfernt, Projekt kann im Dashboard gelöscht werden
+9. ~~**Netlify-Projekt noch aktiv**~~ → Von Dennis im Dashboard gelöscht in Session 7
+10. ~~**CSS-Variablen kryptisch**~~ → Umbenannt: `--c`→`--bg`, `--s`→`--bg-soft`, `--t`→`--accent`, `--r`→`--accent-light`, `--b`→`--dark`, `--m`→`--muted`, `--tx`→`--text` in Session 6
+11. ~~**Keine Favicon-Datei**~~ → `favicon.svg` erstellt (rosa Kreis mit weißem "E") + `<link>` in index.html in Session 6
 
 ### Erledigte Punkte (aus alter Liste)
 - ~~Chatbot-Widget nicht standalone~~ → v2 ist jetzt config-basiert und universal
@@ -209,11 +213,11 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
   - `.gitignore` von UTF-16 auf UTF-8 neugeschrieben, `.netlify/` hinzugefügt
   - Chatbot public/index.html: "Nagellack +7€" → "Inkl. Fußbad, Peeling, Massage"
 - **Noch nicht gefixt (benötigt weitere Arbeit):**
-  - Chatbot Rate Limiting + Input-Validation + Prompt-Injection-Schutz
-  - Widget XSS (innerHTML statt textContent für Config-Werte)
+  - ~~Chatbot Rate Limiting + Input-Validation + Prompt-Injection-Schutz~~ → ✅ Session 6
+  - ~~Widget XSS (innerHTML statt textContent für Config-Werte)~~ → ✅ Session 6
   - index.html ↔ generate.js Sync (Live-Seite manuell editiert, weicht vom Generator ab)
-  - CSS-Variablen kryptisch (--c, --t etc.) → sprechende Namen
-  - Keine Favicon-Datei
+  - ~~CSS-Variablen kryptisch (--c, --t etc.) → sprechende Namen~~ → ✅ Session 6
+  - ~~Keine Favicon-Datei~~ → ✅ Session 6
 
 ### Session 5 (11.04. – Git Push + Airtable)
 - **Alle Session-4-Fixes committed + gepusht** (beide Repos)
@@ -249,6 +253,43 @@ Die `_template/config.json` enthält jetzt ALLES was pro Kunde nötig ist:
   - Select-Felder (Leistungen, Status, Quelle, Kunde) blockierten API-Writes → Workaround: nur Text-Felder beschreiben
   - Token braucht Scopes: `data.records:read`, `data.records:write`, `schema.bases:read`, `schema.bases:write`
 - **FORMULAR FUNKTIONIERT END-TO-END:** Website-Formular → Airtable CRM + WhatsApp-Deeplink ✅
+- **Chatbot Security gehärtet:**
+  - Rate Limiting: 10 Nachrichten/Min pro IP (in-memory Map, CF-Connecting-IP)
+  - Input-Validierung: max 500 Zeichen pro Nachricht, max 20 Nachrichten History
+  - Message-Sanitization: Role wird erzwungen (nur "user"/"assistant"), Content als String gecheckt
+  - 429-Response mit deutschem Fehlertext bei Rate Limit
+- **XSS-Fix im Widget:** `esc()` Funktion (textContent-basiert) für alle Config-Werte im HTML
+- **Favicon erstellt:** `favicon.svg` (rosa Kreis #d4607a + weißes "E"), `<link>` in index.html
+- **CSS-Variablen umbenannt:** 74 Referenzen in index.html: `--c`→`--bg`, `--s`→`--bg-soft`, `--t`→`--accent`, `--r`→`--accent-light`, `--b`→`--dark`, `--m`→`--muted`, `--tx`→`--text`
+- **Git Commits (alle deployed):**
+  - Chatbot: `57ba8c4` (Rate Limiting + Sanitization), `88f5072` (form.js restore), `af4d1db` (XSS-Fix)
+  - Website: `af9eaef` (Favicon), `99d2942` (CSS-Variablen-Rename)
+- **Airtable TODO:** Select-Felder (Leistungen, Status, Quelle, Kunde) auf "Single line text" umstellen, damit API-Writes alle Felder befüllen können
+
+### Session 7 (12.04. – Bugfixes, Sync, IONOS Domain-Fix)
+- **WRBL Desktop Assistant gebaut (Electron App):**
+  - Modulare Plugin-Architektur (Dashboard, Kunden, Website-Generator, Automationen, Chatbot, Finanzen)
+  - sql.js (pure JS SQLite, kein native Compile nötig), LLM-Abstraction (Ollama → Groq → Claude Fallback)
+  - System Tray, IPC, Preload Scripts
+  - **GELÖSCHT** – Dennis baut bessere Version auf seinem PC (RTX 3060) neu
+- **Groq API Model Update:** llama-3.3-70b-versatile → qwen-qwq-32b (neuer, besser)
+- **CRM-Evaluierung:** Airtable bleibt (Free-Plan reicht erstmal, Wechsel zu Supabase/NocoDB erst wenn nötig)
+- **generate.js ↔ index.html Sync gefixt:**
+  - index.html komplett neu aus config.json generiert (war vorher manuell editiert und out of sync)
+  - Backup: `index.html.backup-20260412`
+- **generate.js Fixes:**
+  - CNAME-Fix: Dynamisch `www.` Prefix wenn in business.url vorhanden
+  - WhatsApp-Prefill-Text verbessert: Persönliche Anrede mit Vornamen statt generisch
+  - Bewertungen dynamisch: timeAgo() berechnet aus echten Datumswerten in config.json
+- **CNAME-Datei korrigiert:** `ewelinas-oase.de` → `www.ewelinas-oase.de`
+- **Google Verification File:** `google12ae90ebd971bd23.html` in Root kopiert (fehlte außerhalb von dist/)
+- **IONOS Root-Domain-Fix:** Domain-Weiterleitung eingerichtet: `ewelinas-oase.de` → `https://www.ewelinas-oase.de` (HTTP-Redirect)
+- **Airtable Select-Felder gefixt:** Von Dennis auf "Single line text" umgestellt (damit API-Writes funktionieren)
+- **Netlify-Projekt gelöscht:** Von Dennis im Dashboard entfernt
+- **WA-Button + Chatbot-Button Überlappung gefixt:** WhatsApp-Button nach links verschoben (`right: 5.5rem`), sitzt jetzt neben dem Chatbot-Button statt drauf
+- **Docs erstellt:**
+  - `docs/airtable-fix.md` – Anleitung Select → Single line text
+  - `docs/netlify-loeschen.md` – Anleitung Netlify-Projekt löschen
 
 ## Langfrist-Vision
 - Mehrere Branchen-Templates (Fußpflege ✅, Friseur ✅, Handwerker ✅, Kosmetik, Gastro...)

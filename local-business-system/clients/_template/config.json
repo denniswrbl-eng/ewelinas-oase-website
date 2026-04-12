@@ -35,8 +35,8 @@
     "email": "",
     "whatsapp": "",
     "whatsapp_help": "Nur Zahlen ohne +, z.B. 491761234567",
-    "webhookUrl": "",
-    "webhookUrl_help": "n8n Webhook URL, z.B. https://auto.wrbl.digital/webhook/anfrage"
+    "formApiUrl": "",
+    "formApiUrl_help": "Cloudflare Worker API URL, z.B. https://ewelinas-oase-chatbot.pages.dev/api/form"
   },
 
   "address": {
@@ -148,8 +148,22 @@
   "integrations": {
     "chatbot": {
       "enabled": false,
-      "scriptUrl": null,
-      "chatbot_help": "Chatbot erst aktivieren wenn Cloudflare Worker deployed ist"
+      "version": 2,
+      "scriptUrl": "",
+      "apiUrl": "",
+      "clientId": "",
+      "greeting": "Hallo! Wie kann ich dir helfen?",
+      "subtitle": "Meistens antworte ich sofort",
+      "quickReplies": [],
+      "chatbot_help": "version: 2 = AI-Chatbot (braucht Groq API), 'rules' = Regelbasiert (kostenlos, kein AI)"
+    },
+    "rulesChatbot": {
+      "enabled": false,
+      "scriptUrl": "https://ewelinas-oase-chatbot.pages.dev/chatbot-widget-rules.js",
+      "rules": [],
+      "rules_help": "Array von {keywords: ['preis','kosten'], answer: 'Eine Behandlung kostet 35€.'}",
+      "fallback": "Das kann ich leider nicht beantworten. Ruf uns an oder schreib per WhatsApp!",
+      "rulesChatbot_help": "Regelbasierter Chatbot ohne AI – keine API-Kosten, rein Keyword-basiert"
     },
     "analytics": {
       "enabled": false,

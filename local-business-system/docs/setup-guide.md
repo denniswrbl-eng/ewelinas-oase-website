@@ -2,16 +2,16 @@
 
 ## Voraussetzungen
 - Node.js (v18+): https://nodejs.org
-- Docker Desktop: https://docker.com/products/docker-desktop
 - Git: https://git-scm.com
 - VS Code + Continue.dev Extension
 - Ollama: https://ollama.ai
+- Wrangler CLI: `npm install -g wrangler` (Cloudflare Deploy-Tool)
 
 ---
 
 ## 1. Ollama einrichten (lokale AI)
 
-```bash
+```powershell
 # Ollama installieren (Windows: Download von ollama.ai)
 # Dann Modelle laden:
 ollama pull qwen2.5-coder:14b    # Hauptmodell zum Coden
@@ -40,184 +40,129 @@ In VS Code → Continue Extension → config.json:
 
 ---
 
-## 2. Docker + n8n installieren
+## 2. Cloudflare einrichten
 
-### Docker Desktop starten
-1. Docker Desktop installieren + starten
-2. Prüfen: `docker --version` → sollte Version zeigen
+### Cloudflare Account
+1. Account auf https://dash.cloudflare.com erstellen
+2. `npx wrangler login` → bestätigt im Browser
 
-### n8n mit Docker starten
-```bash
-# Ordner für n8n-Daten erstellen
-mkdir -p ~/n8n-data
+### Projekte erstellen
+Pro Kunde ein Cloudflare Pages Projekt:
+1. Cloudflare Dashboard → Pages → "Create a project" → "Direct Upload"
+2. Projekt-Namen eingeben (z.B. `ewelinasoase`)
 
-# n8n starten (bleibt laufen)
-docker run -d \
-  --name n8n \
-  -p 5678:5678 \
-  -v ~/n8n-data:/home/node/.n8n \
-  -e GENERIC_TIMEZONE="Europe/Berlin" \
-  -e TZ="Europe/Berlin" \
-  --restart unless-stopped \
-  n8nio/n8n
-```
-
-3. Browser öffnen: **http://localhost:5678**
-4. Account erstellen (lokal, nur für dich)
-
-### n8n-Umgebungsvariablen setzen
-In Docker → n8n Container → Environment:
-```
-AIRTABLE_BASE_ID=appXXXXXXXXXXXX
-OWNER_WHATSAPP=49176XXXXXXXX
-GOOGLE_REVIEW_URL=https://g.page/r/XXXXXXXXX/review
-CALLMEBOT_API_KEY=XXXXXXX
-```
-
-Oder beim Docker-Start mitgeben:
-```bash
-docker run -d \
-  --name n8n \
-  -p 5678:5678 \
-  -v ~/n8n-data:/home/node/.n8n \
-  -e GENERIC_TIMEZONE="Europe/Berlin" \
-  -e TZ="Europe/Berlin" \
-  -e AIRTABLE_BASE_ID="appXXXXXXXXXXXX" \
-  -e OWNER_WHATSAPP="49176XXXXXXXX" \
-  --restart unless-stopped \
-  n8nio/n8n
-```
+### Umgebungsvariablen setzen (für Chatbot + Formular)
+In Cloudflare Dashboard → Pages → dein Chatbot-Projekt → Settings → Environment variables:
+- `GROQ_API_KEY` → API-Key von https://console.groq.com (für AI-Chatbot)
+- `AIRTABLE_TOKEN` → Personal Access Token von Airtable (für Formular-Backend)
 
 ---
 
-## 3. Workflows importieren
-
-1. n8n öffnen → Hamburger-Menü → **Import from File**
-2. Nacheinander importieren:
-   - `automations/01-anfrage-speichern.json`
-   - `automations/02-benachrichtigung.json`
-   - `automations/03-follow-up.json`
-   - `automations/04-bewertung.json`
-
-3. In jedem Workflow: **Credentials anpassen!**
-   - Airtable: Personal Access Token eintragen
-   - SMTP: E-Mail-Server eintragen (oder Gmail SMTP)
-
----
-
-## 4. Airtable einrichten
+## 3. Airtable CRM einrichten
 
 Siehe: [docs/airtable-setup.md](airtable-setup.md)
 
+WICHTIG: Alle Felder die per API beschrieben werden (Leistungen, Status, Quelle, Kunde) als "Single line text" anlegen, NICHT als "Single Select"!
+
 ---
 
-## 5. Erste Website generieren
+## 4. Erste Website generieren
 
-```bash
+```powershell
 # Template für neuen Kunden kopieren
-cp -r clients/_template clients/mein-kunde
+Copy-Item -Recurse clients/_template clients/mein-kunde
 
 # config.json ausfüllen (alle Felder!)
+# Fonts als .ttf in fonts/ legen (DSGVO: keine Google Fonts extern!)
 # Bilder in images/ legen
 
 # Website generieren
 node template/generate.js clients/mein-kunde/config.json clients/mein-kunde/dist
 
-# Testen
-# Öffne clients/mein-kunde/dist/index.html im Browser
+# Generiert: index.html, robots.txt, sitemap.xml, CNAME, config.json
 ```
 
-## 5b. Deployment auf Cloudflare Pages
+### Testen
+- Öffne `clients/mein-kunde/dist/index.html` im Browser
+- Mobile testen: Ctrl+Shift+I → Responsive Mode
+- WhatsApp-Buttons testen (Prefill-Text prüfen)
+- Kontaktformular testen
+
+---
+
+## 5. Deployment auf Cloudflare Pages
 
 ```powershell
-# In den dist-Ordner wechseln
-cd clients/mein-kunde/dist
+# Website deployen
+npx wrangler pages deploy clients/mein-kunde/dist --project-name=projektname
 
-# Auf Cloudflare Pages deployen (Projekt muss vorher existieren)
-npx wrangler pages deploy . --project-name=projektname
-
-# Beim ersten Mal: Cloudflare-Login im Browser bestätigen
-# Danach: Custom Domain in Cloudflare Dashboard → Pages → Custom Domains hinzufügen
+# Chatbot deployen (aus dem Chatbot-Repo)
+cd C:\Users\denni\AI-Chatbot
+npx wrangler pages deploy public --project-name=ewelinas-oase-chatbot
 ```
 
-**Wichtig:** Domain-DNS muss als CNAME auf `projektname.pages.dev` zeigen.
+**Beim ersten Mal:** Cloudflare-Login im Browser bestätigen.
+
+**Danach:** Custom Domain in Cloudflare Dashboard → Pages → Custom Domains hinzufügen. Domain-DNS muss als CNAME auf `projektname.pages.dev` zeigen.
+
+**WICHTIG:** Cloudflare hat KEINE Git-Verbindung! `git push` allein deployed NICHT. Immer Wrangler nutzen.
 
 ---
 
 ## 6. End-to-End Test
 
-So testest du die komplette Kette:
-
 ### Test 1: Formular → Airtable
-1. n8n Workflow `01-anfrage-speichern` aktivieren
-2. Webhook-URL kopieren (z.B. `http://localhost:5678/webhook/anfrage`)
-3. Im Terminal testen:
-
-**PowerShell (Windows):**
-```powershell
-Invoke-RestMethod -Uri "http://localhost:5678/webhook/anfrage" -Method POST -ContentType "application/json" -Body '{"name":"Test Person","email":"test@example.com","phone":"01761234567","message":"Das ist ein Testformular"}'
+Im Browser (Ctrl+Shift+I → Console):
+```javascript
+fetch('https://dein-chatbot-projekt.pages.dev/api/form', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: 'Test Person',
+    email: 'test@example.com',
+    phone: '01761234567',
+    service: 'Fußpflege (35 €)',
+    preferredDate: 'Montag Vormittag',
+    clientId: 'ewelinas-oase'
+  })
+}).then(r => r.json()).then(console.log)
 ```
+→ Sollte `{"success":true,"recordId":"recXXXXX"}` zurückgeben.
+→ In Airtable prüfen: neuer Eintrag sollte da sein ✓
 
-**Bash (Linux/Mac):**
-```bash
-curl -X POST http://localhost:5678/webhook/anfrage \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test Person","email":"test@example.com","phone":"01761234567","message":"Das ist ein Testformular"}'
-```
-4. In Airtable prüfen → neuer Eintrag sollte da sein ✓
-
-### Test 2: Benachrichtigung
-1. Workflow `02-benachrichtigung` aktivieren
-2. Gleicher Test wie oben, aber an `/webhook/notify`
-3. E-Mail / WhatsApp vom Inhaber prüfen ✓
+### Test 2: Chatbot
+1. Website öffnen → Chatbot-Icon unten rechts klicken
+2. Quick Reply testen → Antwort sollte kommen
+3. Eigene Frage tippen → Antwort prüfen
 
 ---
 
-## 7. Für Produktion (wenn Kunden kommen)
+## 7. Chatbot für neuen Kunden einrichten
 
-### Hetzner VPS (3,79€/Monat)
-```bash
-# Auf dem Server:
-apt update && apt install docker.io docker-compose -y
+### AI-Chatbot (mit Groq, kostenlos)
+1. In `AI-Chatbot/functions/api/chat.js` → `CLIENTS`-Objekt neues Objekt hinzufügen
+2. System-Prompt schreiben (Öffnungszeiten, Leistungen, Tonfall)
+3. `allowedOrigins` mit der Kunden-Domain konfigurieren
+4. In config.json: `integrations.chatbot.enabled: true`, `version: 2`, `clientId` setzen
+5. Chatbot deployen
 
-# docker-compose.yml erstellen:
+### Regelbasierter Chatbot (ohne AI, null Kosten)
+1. In config.json: `integrations.rulesChatbot.enabled: true`
+2. `rules` Array mit Keyword-Antwort-Paaren befüllen
+3. Kein Backend nötig – läuft komplett im Browser
+4. Website deployen – fertig
+
+---
+
+## Ordnerstruktur
 ```
-
-```yaml
-version: "3"
-services:
-  n8n:
-    image: n8nio/n8n
-    ports:
-      - "5678:5678"
-    volumes:
-      - ./n8n-data:/home/node/.n8n
-    environment:
-      - GENERIC_TIMEZONE=Europe/Berlin
-      - N8N_HOST=n8n.deine-agentur.de
-      - N8N_PROTOCOL=https
-      - WEBHOOK_URL=https://n8n.deine-agentur.de/
-    restart: unless-stopped
-
-  caddy:
-    image: caddy:2
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-    restart: unless-stopped
-
-volumes:
-  caddy_data:
+local-business-system/
+├── template/generate.js        ← Site Generator (config → HTML)
+├── clients/
+│   ├── _template/config.json   ← Leere Vorlage für neue Kunden
+│   ├── demo-fusspflege/        ← Ewelinas Oase (live)
+│   ├── demo-friseur/           ← Friseur-Demo
+│   └── demo-handwerker/        ← Handwerker-Demo
+├── automations/                ← n8n Workflows (optional, für spätere Nutzung)
+└── docs/                       ← Diese Dokumentation
 ```
-
-### Caddyfile (automatisches HTTPS)
-```
-n8n.deine-agentur.de {
-    reverse_proxy n8n:5678
-}
-```
-
-→ Damit hast du n8n online mit automatischem SSL für ca. 3,79€/Monat.
