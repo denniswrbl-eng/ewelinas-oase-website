@@ -655,19 +655,16 @@
     <p>Diese Website wird bei Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) gehostet. Beim Besuch der Website werden automatisch Informationen (z. B. IP-Adresse, Browsertyp, Zeitpunkt des Zugriffs) in Server-Log-Files gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der sicheren Bereitstellung der Website). Cloudflare ist unter dem EU-US Data Privacy Framework zertifiziert. Weitere Infos: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare Datenschutzerklärung</a>.</p>
 
     <h3>4. Kontaktformular</h3>
-    <p>Wenn Sie uns über das Kontaktformular kontaktieren, werden folgende Daten verarbeitet: Name, E-Mail-Adresse, Telefonnummer, gewünschte Leistung und Nachricht. Die Verarbeitung erfolgt zum Zweck der Terminvereinbarung auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen).</p>
-    <p>Ihre Daten werden über eine verschlüsselte Verbindung (HTTPS) an folgende Auftragsverarbeiter übermittelt:</p>
-    <ul>
-      <li><strong>Airtable</strong> (Formagrid Inc., 799 Market St, San Francisco, CA 94103, USA) – Speicherung der Anfrage. Airtable ist unter dem EU-US Data Privacy Framework zertifiziert. Ein Auftragsverarbeitungsvertrag (DPA) liegt vor.</li>
-      <li><strong>Google Gmail</strong> (Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Irland) – Versand der E-Mail-Benachrichtigung. Ein Auftragsverarbeitungsvertrag (DPA) liegt vor.</li>
-    </ul>
-    <p>Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nach Abschluss der Bearbeitung bzw. spätestens nach 6 Monaten gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
+    <p>Wenn Sie das Kontaktformular nutzen und auf „Termin anfragen" klicken, öffnet sich in Ihrem eigenen Mail-Programm ein vorausgefüllter E-Mail-Entwurf. Die eingegebenen Daten (Name, E-Mail-Adresse, Telefonnummer, gewünschte Leistung, Nachricht) verlassen Ihren Rechner erst, wenn Sie die E-Mail selbst absenden — und gehen dann direkt an <a href="mailto:info@ewelinas-oase.de">info@ewelinas-oase.de</a>.</p>
+    <p>In diesem Ablauf sind auf unserer Seite <strong>keine weiteren Auftragsverarbeiter</strong> (kein Airtable, kein n8n, kein Gmail-Versand durch uns) eingebunden. Die Verarbeitung erfolgt ausschließlich zum Zweck der Terminvereinbarung auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen). Eingegangene Anfragen werden nach Abschluss der Bearbeitung bzw. spätestens nach 6 Monaten gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
+    <p><em>Hinweis:</em> Sobald eine serverseitige Formularverarbeitung aktiviert wird (geplant frühestens nach dem 08.06.2026 über einen eigenen Server in Deutschland), werden die dann eingebundenen Auftragsverarbeiter an dieser Stelle mit mindestens 14 Tagen Vorlauf veröffentlicht (Art. 28 Abs. 2 DSGVO).</p>
 
     <h3>5. Google Maps</h3>
     <p>Diese Website nutzt Google Maps (Google Ireland Ltd.) zur Darstellung des Standorts. Google Maps wird erst nach Ihrer ausdrücklichen Einwilligung (Klick auf „Karte laden") geladen. Erst dann werden Daten (u. a. Ihre IP-Adresse) an Google übertragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Weitere Infos: <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener noreferrer">Google Datenschutzerklärung</a>.</p>
 
     <h3>6. Chatbot</h3>
     <p>Diese Website bietet einen KI-gestützten Chatbot zur Beantwortung von Fragen rund um unseren Salon. Wenn Sie den Chatbot nutzen, werden Ihre eingegebenen Nachrichten an unseren Server (Cloudflare Pages) und von dort an den KI-Dienst Groq Inc. (USA) zur Verarbeitung weitergeleitet. Es werden keine personenbezogenen Daten gespeichert – die Chatverläufe existieren nur während Ihrer aktiven Sitzung im Browser. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch aktive Nutzung des Chatbots). Groq ist unter dem EU-US Data Privacy Framework zertifiziert.</p>
+    <p><em>Hinweis zu weiteren KI-Anbietern im Code:</em> Der Chatbot-Code enthält technische Anbindungen an Anthropic PBC (USA/Irland) und Together AI, Inc. (USA) als Ausfall-Absicherung. Diese sind derzeit <strong>nicht aktiv</strong> – es sind keine API-Schlüssel hinterlegt, es findet keine Datenübermittlung statt. Eine Aktivierung würde an dieser Stelle mit mindestens 14 Tagen Vorlauf angekündigt (Art. 28 Abs. 2 DSGVO).</p>
 
     <h3>7. Cookies</h3>
     <p>Diese Website verwendet ausschließlich technisch notwendige Cookies (z. B. Speicherung Ihrer Cookie-Einstellung). Es werden keine Tracking-Cookies, Analyse-Tools oder Werbecookies eingesetzt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).</p>
@@ -713,7 +710,7 @@
   // Auto-load map if user already consented
   try { if (localStorage.getItem('map_consent')) loadMap(); } catch(e) {}
 
-  // Form Submit → Airtable API + WhatsApp-Fallback
+  // Form Submit → mailto-Entwurf (kein Server-Backend bis Gewerbestart 08.06.2026)
   function send(e) {
     e.preventDefault();
     var form = document.getElementById('form');
@@ -723,40 +720,29 @@
     // Honeypot check – wenn ausgefüllt, ist es ein Bot
     if (form.website && form.website.value) { ok.style.display = 'block'; form.reset(); btn.textContent = 'Gesendet ✓'; return; }
 
-    btn.disabled = true;
-    btn.textContent = 'Wird gesendet...';
+    var name    = form.name.value || '';
+    var phone   = form.phone.value || '';
+    var email   = form.email.value || '';
+    var service = form.service.value || '';
+    var wunsch  = form.preferred_date.value || '';
 
-    var data = {
-      name: form.name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      service: form.service.value,
-      preferredDate: form.preferred_date.value,
-      clientId: 'ewelinas-oase'
-    };
+    var subject = 'Terminanfrage' + (name ? ' – ' + name : '');
+    var body =
+      'Hallo Ewelina,\n\n' +
+      'ich möchte einen Termin anfragen.\n\n' +
+      'Name: ' + name + '\n' +
+      'Telefon / WhatsApp: ' + phone + '\n' +
+      'E-Mail: ' + email + '\n' +
+      'Leistung: ' + service + '\n' +
+      'Wunschtermin / Nachricht:\n' + wunsch + '\n\n' +
+      'Viele Grüße\n' + name;
 
-    // WhatsApp-Nachricht zusammenbauen
-    var waText = 'Hallo Ewelina,%0A%0A'
-      + 'ich möchte gerne einen Termin anfragen.%0A%0A'
-      + 'Name: ' + encodeURIComponent(form.name.value) + '%0A'
-      + 'Telefon: ' + encodeURIComponent(form.phone.value) + '%0A'
-      + 'Leistung: ' + encodeURIComponent(form.service.value) + '%0A'
-      + 'Wunschtermin: ' + encodeURIComponent(form.preferred_date.value);
+    var mailto = 'mailto:info@ewelinas-oase.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.location.href = mailto;
 
-    fetch('https://ewelinas-oase-chatbot.pages.dev/api/form', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(function() {
-        window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
-        ok.style.display = 'block'; form.reset(); btn.textContent = 'Gesendet ✓';
-      })
-      .catch(function() {
-        // Fallback: WhatsApp öffnet sich auch wenn Backend fehlt
-        window.open('https://wa.me/4917631562454?text=' + waText, '_blank');
-        ok.style.display = 'block'; form.reset(); btn.textContent = 'Gesendet ✓';
-      });
+    ok.textContent = '💛 Dein Mail-Programm öffnet sich mit einer vorausgefüllten E-Mail. Bitte dort auf „Senden" tippen. Alternativ: direkt per WhatsApp melden.';
+    ok.style.display = 'block';
+    btn.textContent = 'Mail-Entwurf geöffnet ✓';
   }
 
   // Modals
