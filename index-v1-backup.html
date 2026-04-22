@@ -102,16 +102,15 @@
   </script>
 
   <style>
-    /* ── TOKENS (v2: weniger pink-overdose, dunklerer Anchor für Premium-Look) ── */
+    /* ── TOKENS (from config) ── */
     :root {
-      --bg:  #faf7f5;
-      --bg-soft:  #f2e9e9;
-      --accent:  #b84963;
-      --accent-light:  #d4607a;
-      --dark:  #1f1419;
-      --muted:  #6b5560;
-      --text: #1f1419;
-      --line: rgba(31,20,25,.1);
+      --bg:  #fff5f8;
+      --bg-soft:  #fde8ef;
+      --accent:  #d4607a;
+      --accent-light:  #e8a0b4;
+      --dark:  #6b3a4a;
+      --muted:  #9a6b7a;
+      --text: #3d1f2b;
     }
 
     /* ── RESET ── */
@@ -145,8 +144,7 @@
     .hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
     .hero-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,245,248,0) 40%,var(--bg) 100%)}
     .hero-content{padding:1.5rem 1.25rem 2.5rem;display:flex;flex-direction:column;align-items:flex-start;background:var(--bg)}
-    .pill{display:inline-flex;align-items:center;gap:.5rem;color:var(--muted);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;padding:0;margin-bottom:1.2rem;position:relative;padding-left:2.2rem}
-    .pill::before{content:"";position:absolute;left:0;top:50%;width:1.5rem;height:1px;background:var(--accent)}
+    .pill{display:inline-flex;align-items:center;gap:.35rem;background:rgba(212,96,122,.1);color:var(--accent);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .85rem;border-radius:30px;margin-bottom:1rem}
     .hero-content h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2.4rem,9vw,3.6rem);font-weight:300;line-height:1.1;color:var(--dark);margin-bottom:.9rem}
     .hero-content h1 em{font-style:italic;color:var(--accent)}
     .hero-content p{font-size:.9rem;color:var(--muted);line-height:1.75;margin-bottom:1.6rem;max-width:420px}
@@ -161,13 +159,6 @@
     .stat{flex:1;background:#fff;border-radius:14px;padding:.7rem .5rem;text-align:center;box-shadow:0 2px 12px rgba(107,58,74,.08);border:1px solid rgba(212,96,122,.1)}
     .stat-n{font-family:"Cormorant Garamond",serif;font-size:1.5rem;color:var(--accent);line-height:1}
     .stat-l{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
-    .hero-trust{display:flex;align-items:center;gap:.6rem;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line)}
-    .trust-stars{color:var(--accent);letter-spacing:.1em;font-size:.85rem}
-    .trust-text{font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
-    /* ── ICON HELPERS (v2) ── */
-    .ico{display:inline-block;width:1em;height:1em;vertical-align:-.15em;margin-right:.45em;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-    .ico--solo{margin-right:0}
-    .ib-ico svg, .tile-ico svg, .map-consent-ico svg{width:1.4em;height:1.4em;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 
     /* ── SECTIONS ── */
     .sec{padding:2.5rem 1.25rem}
@@ -381,16 +372,17 @@
     <img alt="Ewelinas Oase – Fußpflege &amp; Wellness in Hamm" src="images/hero.jpg">
   </div>
   <div class="hero-content">
-    <span class="pill">Ostenallee 55 · Hamm</span>
-    <h1>Deine Füße. Meine Zeit.<br><em>Deine Stunde.</em></h1>
-    <p>Keine Fließbandarbeit. Kein Zeitdruck. Ein warmes Fußbad, eine gründliche Behandlung und eine Stunde, in der ich mich komplett auf dich konzentriere.</p>
+    <span class="pill">✦ Fußpflege · Hamm</span>
+    <h1>Deine Füße verdienen das <em>Beste</em></h1>
+    <p>Professionelle Fußpflege in Hamm – persönlich, hygienisch, mit Liebe. Gönn dir eine Auszeit.</p>
     <div class="hero-btns">
-      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20interessiere%20mich%20f%C3%BCr%20eine%20Fu%C3%9Fpflege-Behandlung%20(35%E2%82%AC).%0AWann%20w%C3%A4re%20ein%20Termin%20m%C3%B6glich%3F%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="btn btn-fill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.4rem"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>WhatsApp</a>
+      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20interessiere%20mich%20f%C3%BCr%20eine%20Fu%C3%9Fpflege-Behandlung%20(35%E2%82%AC).%0AWann%20w%C3%A4re%20ein%20Termin%20m%C3%B6glich%3F%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="btn btn-fill">💬 WhatsApp</a>
       <a href="#kontakt" class="btn btn-ghost">Termin anfragen</a>
     </div>
-    <div class="hero-trust">
-      <span class="trust-stars">★★★★★</span>
-      <span class="trust-text">5,0 · 4 Bewertungen auf Google</span>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">5★</div><div class="stat-l">Google</div></div>
+      <div class="stat"><div class="stat-n">2+</div><div class="stat-l">Jahre</div></div>
+      <div class="stat"><div class="stat-n">♡</div><div class="stat-l">Liebe</div></div>
     </div>
   </div>
 </div>
@@ -425,9 +417,9 @@
   <div class="wa-flow">
     <p class="wa-flow-title">Direkt per WhatsApp buchen:</p>
     <div class="wa-flow-btns">
-      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20interessiere%20mich%20f%C3%BCr%20eine%20Fu%C3%9Fpflege-Behandlung%20(35%E2%82%AC).%0AWann%20w%C3%A4re%20ein%20Termin%20m%C3%B6glich%3F%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn"><svg class="ico" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Fußpflege Komplett (35 €)</a>
-      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20m%C3%B6chte%20gerne%20einen%20Termin%20f%C3%BCr%20eine%20Fu%C3%9Fpflege%20vereinbaren.%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn"><svg class="ico" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Termin vereinbaren</a>
-      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20habe%20eine%20Frage%20zu%20Ihren%20Leistungen.%0A%0AMein%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn"><svg class="ico" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Allgemeine Anfrage</a>
+      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20interessiere%20mich%20f%C3%BCr%20eine%20Fu%C3%9Fpflege-Behandlung%20(35%E2%82%AC).%0AWann%20w%C3%A4re%20ein%20Termin%20m%C3%B6glich%3F%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn">💬 Fußpflege Komplett (35 €)</a>
+      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20m%C3%B6chte%20gerne%20einen%20Termin%20f%C3%BCr%20eine%20Fu%C3%9Fpflege%20vereinbaren.%0A%0AMein%20Name%3A%20%0AWunschtermin%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn">💬 Termin vereinbaren</a>
+      <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20habe%20eine%20Frage%20zu%20Ihren%20Leistungen.%0A%0AMein%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer" class="wa-flow-btn">💬 Allgemeine Anfrage</a>
     </div>
   </div>
   <div class="leis-imgs">
@@ -452,8 +444,8 @@
   <h2 class="sec-h">Hallo, ich bin <em>Ewelina</em></h2>
   <div class="about-grid">
     <div class="about-text">
-      <p class="about-intro">Ich mache das aus Überzeugung – nicht aus Routine.</p>
-      <p class="about-body">Mir ist wichtig, dass du merkst: ich nehme mir Zeit für dich. Keine Fließbandarbeit, kein Blick auf die Uhr. Wer einmal bei mir war, kommt meistens wieder – weil es sich anders anfühlt als der Schnelldurchlauf in anderen Studios.</p>
+      <p class="about-intro">Fußpflege ist für mich kein Job – es ist meine Leidenschaft. Ich glaube, dass jeder Mensch verdient, gut behandelt zu werden. Deshalb nehme ich mir für jeden Kunden die Zeit, die er wirklich braucht.</p>
+      <p class="about-body">Seit über 2 Jahren führe ich meinen Salon in Hamm und habe dabei gelernt: Was Kunden am meisten schätzen, ist nicht nur das Ergebnis – sondern das Gefühl, wirklich willkommen zu sein. Kein Stress, kein Hetzen. Nur du, deine Füße und eine ruhige Stunde für dich.</p>
       <div class="perks">
         <div class="perk"><span class="perk-ico">✦</span><span>Alle Instrumente werden sterilisiert &amp; desinfiziert</span></div>
         <div class="perk"><span class="perk-ico">✦</span><span>Einweg-Materialien wo möglich</span></div>
@@ -463,7 +455,7 @@
       </div>
     </div>
     <div class="about-quote">
-      <blockquote>„Bei mir bekommst du meine volle Stunde. Immer."</blockquote>
+      <blockquote>„Ich freue mich auf jeden Kunden – und ich möchte, dass du das spürst."</blockquote>
       <cite>— Ewelina Maria Wrobel</cite>
     </div>
   </div>
@@ -472,7 +464,7 @@
 <!-- INFO BAR -->
 <div class="info-bar">
   <div class="ib">
-    <div class="ib-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div class="ib-ico">🕐</div>
     <div class="ib-lbl">Termine</div>
     <div class="ib-val">
       <strong>Ausschließlich nach Vereinbarung</strong><br>
@@ -480,7 +472,7 @@
     </div>
   </div>
   <div class="ib">
-    <div class="ib-ico"><svg viewBox="0 0 24 24"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="ib-ico">📍</div>
     <div class="ib-lbl">Adresse</div>
     <div class="ib-val"><strong>Ostenallee 55</strong><br>59063 Hamm</div>
   </div>
@@ -489,7 +481,7 @@
 <!-- MAP (Click-to-Load für DSGVO) -->
 <div class="map-wrap" id="map-wrap">
   <div class="map-consent" id="map-consent" onclick="loadMap()">
-    <div class="map-consent-ico"><svg viewBox="0 0 24 24"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="map-consent-ico">📍</div>
     <div class="map-consent-txt">Karte wird von Google Maps geladen.<br>Dabei werden Daten an Google übertragen.</div>
     <div class="map-consent-btn">Karte laden</div>
   </div>
@@ -500,7 +492,7 @@
   <div class="bew-top">
     <span class="sec-lbl">Google Rezensionen</span>
     <h2 class="sec-h sec-h--tight">Was Kunden <em>sagen</em></h2>
-    <div class="bew-stars">★★★★★</div>
+    <div class="bew-stars">⭐⭐⭐⭐⭐</div>
     <div class="bew-sub">5.0 von 5 · 4 Bewertungen · <a href="https://www.google.com/search?q=Ewelinas+Oase+Hamm+Bewertungen" target="_blank" rel="noopener noreferrer" class="google-link">Alle auf Google ansehen →</a></div>
   </div>
   <div class="rev-grid">
@@ -534,16 +526,16 @@
   <p class="kontakt-intro">Termine ausschließlich nach Vereinbarung – nenn mir einfach deinen Wunschtermin, ich melde mich zeitnah zurück.</p>
   <div class="tiles">
     <a href="tel:+4917631562454" class="tile">
-      <div class="tile-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="tile-lbl">Anrufen</div><div class="tile-val">0176 / 31 56 24 54</div>
+      <div class="tile-ico">📞</div><div class="tile-lbl">Anrufen</div><div class="tile-val">0176 / 31 56 24 54</div>
     </a>
     <a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20habe%20eine%20Frage%20zu%20Ihren%20Leistungen.%0A%0AMein%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer" class="tile wa">
-      <div class="tile-ico"><svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div><div class="tile-lbl">WhatsApp</div><div class="tile-val">Jetzt schreiben</div>
+      <div class="tile-ico">💬</div><div class="tile-lbl">WhatsApp</div><div class="tile-val">Jetzt schreiben</div>
     </a>
     <div class="tile">
-      <div class="tile-ico"><svg viewBox="0 0 24 24"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="tile-lbl">Adresse</div><div class="tile-val">Ostenallee 55, Hamm</div>
+      <div class="tile-ico">📍</div><div class="tile-lbl">Adresse</div><div class="tile-val">Ostenallee 55, Hamm</div>
     </div>
     <div class="tile">
-      <div class="tile-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="tile-lbl">Termine</div><div class="tile-val">Ausschließlich nach Vereinbarung</div>
+      <div class="tile-ico">🕐</div><div class="tile-lbl">Termine</div><div class="tile-val">Ausschließlich nach Vereinbarung</div>
     </div>
   </div>
   <form id="form" onsubmit="send(event)">
@@ -577,14 +569,14 @@
     </div>
     <button type="submit" class="sub-btn">Anfrage senden</button>
     <p style="text-align:center; margin-top:14px; font-size:14px; color:#6b3a4a;">Oder direkt <a href="https://wa.me/4917631562454" target="_blank" rel="noopener noreferrer" style="color:#d4607a; text-decoration:underline;">per WhatsApp</a> · <a href="#" onclick="sendMail(event); return false;" style="color:#d4607a; text-decoration:underline;">per E-Mail</a></p>
-    <div class="ok" id="ok"><svg class="ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Vielen Dank! Ewelina meldet sich bald bei dir.</div>
+    <div class="ok" id="ok">💛 Vielen Dank! Ewelina meldet sich bald bei dir.</div>
     <div id="err" style="display:none;margin-top:14px;padding:12px 14px;background:#fdecef;border-left:3px solid #d4607a;border-radius:8px;font-size:14px;color:#6b3a4a"></div>
   </form>
 </section>
 </main>
 
 <!-- WA FLOAT -->
-<a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20habe%20eine%20Frage%20zu%20Ihren%20Leistungen.%0A%0AMein%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer" class="wa-fab" aria-label="WhatsApp Kontakt"><svg class="ico" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>WhatsApp</a>
+<a href="https://wa.me/4917631562454?text=Hallo%20Ewelina%2C%0Aich%20habe%20eine%20Frage%20zu%20Ihren%20Leistungen.%0A%0AMein%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer" class="wa-fab" aria-label="WhatsApp Kontakt">💬 WhatsApp</a>
 
 <!-- FOOTER -->
 <footer>
@@ -793,7 +785,7 @@
       var data = await res.json().catch(function() { return {}; });
 
       if (res.ok && data.ok) {
-        ok.textContent = '<svg class="ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Vielen Dank! Deine Anfrage ist bei Ewelina angekommen. Sie meldet sich zeitnah bei dir.';
+        ok.textContent = '💛 Vielen Dank! Deine Anfrage ist bei Ewelina angekommen. Sie meldet sich zeitnah bei dir.';
         ok.style.display = 'block';
         form.reset();
         btn.textContent = 'Gesendet ✓';
@@ -829,7 +821,7 @@
     var mailto = 'mailto:info@ewelinas-oase.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(msg.text);
     window.location.href = mailto;
 
-    ok.textContent = '<svg class="ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Dein Mail-Programm öffnet sich mit einer vorausgefüllten E-Mail. Bitte dort auf „Senden" tippen.';
+    ok.textContent = '💛 Dein Mail-Programm öffnet sich mit einer vorausgefüllten E-Mail. Bitte dort auf „Senden" tippen.';
     ok.style.display = 'block';
   }
 
@@ -853,7 +845,7 @@
     theme: { primary: "#d4607a", primaryHover: "#6b3a4a" },
     greeting: "Hallo! Schön, dass du vorbeischaust. Wie kann ich dir helfen? 😊",
     subtitle: "Meistens antworte ich sofort",
-    quickReplies: [{"label":"Preise","msg":"Was kostet eine Fußpflege?"},{"label":"Verfügbarkeit","msg":"Wann kann ich einen Termin bekommen?"},{"label":"Termin anfragen","msg":"Ich möchte einen Termin anfragen"},{"label":"Adresse","msg":"Wo ist der Salon?"}],
+    quickReplies: [{"label":"Preise","msg":"Was kostet eine Fußpflege?"},{"label":"Öffnungszeiten","msg":"Wann habt ihr geöffnet?"},{"label":"Termin buchen","msg":"Ich möchte einen Termin buchen"},{"label":"Adresse","msg":"Wo ist der Salon?"}],
     font: "Jost"
   };
 </script>
