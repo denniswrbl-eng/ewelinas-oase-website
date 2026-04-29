@@ -1,0 +1,26 @@
+# .dev.vars.example — Template für lokale Entwicklung
+#
+# Kopieren nach `.dev.vars` (gitignored!) und echte Werte eintragen.
+# `wrangler pages dev .` liest .dev.vars automatisch in env.* ein.
+#
+# In Production (Cloudflare Pages Dashboard) NICHT diese Datei nutzen,
+# sondern Project Settings → Environment variables & secrets.
+
+# Resend — Transaktionsmail
+# Account: https://resend.com/api-keys
+RESEND_API_KEY=re_REPLACE_ME
+
+# Airtable — Lead-Speicher
+# Token: https://airtable.com/create/tokens  (scope: data.records:write + schema:read auf Base app9kLLaDhUOHINFU)
+AIRTABLE_TOKEN=pat_REPLACE_ME
+AIRTABLE_BASE_ID=app9kLLaDhUOHINFU
+AIRTABLE_TABLE=Anfragen
+
+# Email-Benachrichtigung
+OWNER_EMAIL=dennis.wrbl@gmail.com
+# Session 1: Resend-Test-Absender (kein eigenes Domain-Verify nötig)
+MAIL_FROM=onboarding@resend.dev
+
+# CORS — Komma-Liste erlaubter Origins (Prod + Dev)
+# In Prod z.B. "https://ewelinas-oase.de,https://ewelinas-oase.pages.dev"
+ALLOWED_ORIGINS=http://localhost:8788,http://127.0.0.1:8788
