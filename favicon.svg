@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <circle cx="16" cy="16" r="15" fill="#d4607a"/>
-  <text x="16" y="22" font-family="serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">E</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <g fill="#b84963">
+    <path d="M32 56 C22 48 14 40 14 30 C14 24 18 20 22 22 C26 24 30 30 32 38 C34 30 38 24 42 22 C46 20 50 24 50 30 C50 40 42 48 32 56 Z" opacity=".85"/>
+    <path d="M32 48 C28 42 24 36 24 30 C24 26 26 24 28 25 C30 26 31 30 32 34 C33 30 34 26 36 25 C38 24 40 26 40 30 C40 36 36 42 32 48 Z" fill="#faf7f5"/>
+    <circle cx="32" cy="34" r="3"/>
+  </g>
 </svg>

@@ -1,5 +1,14 @@
+# Build / Wrangler
 .wrangler/
-.claude/
-.netlify/
 dist-friseur/
-dist-handwerker/
+_deploy/
+
+# IDE / Tools
+.claude/
+
+# Lokale Secrets
+.dev.vars
+.env
+
+# Staging — nie committen, gehört in eigene Repos
+_zu-migrieren-in-repo/
